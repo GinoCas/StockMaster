@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void update_menu(string), product_info(Producto), add_product(string);
+void update_menu(string, int, bool), product_info(Producto), add_product(string);
 
 void menu_principal(bool from_login){
 	system("cls");
@@ -16,7 +16,7 @@ void menu_principal(bool from_login){
 	printf("\n\n    \033[1;32mAgregar Categoría    \033[1;33mAgregar Producto    \033[1;31mCerrar Sesión\n\n");
 	printf("\033[1;36m CATEGORÍAS DISPONIBLES:\033[0m\n ",214);
 	escribir("[esp=30][line=-]\n");
-	return update_menu("");
+	return update_menu("", 1, true);
 }
 int update_products(vector<Producto> productos, int page){
 	empty_section(62, 5, 20, 60);
@@ -34,40 +34,42 @@ int update_products(vector<Producto> productos, int page){
 			escribir("[esp=58][line=-]");
 		}
 	}
-	if(limit_y == 8){
+	if(productos.size() > 8){
 		cursor(87, 25);
+		//cout<<productos[11].persona;
 		cout<<page<<"/"<<ceil(productos.size() / 8.0);
 	}
 	return limit_y;
 }
-void update_menu(string from_category){
+void update_menu(string from_category, int page, bool update){
 	bool done = false;
 	opt = 0;
 	opty = 0;
 	vector<string> categorias = get_category_list(from_category);
-	for(int i = 0; i<30; i++){
+	if(update){
+		for(int i = 0; i<30; i++){
 		cursor(0, 9+i);
 		escribir("[esp=50]");
 		
+		}
+		cursor(0,9);
+		for(int i = 0; i<categorias.size(); i++){
+			printf("\033[2K - \x1B[36m%s\n\033[2K\033[0m", categorias[i].c_str());
+		}
+		cout<<" - \033[1;32mVolver\033[0m";
+		for(int i = 0; i<30; i++){ //Division de pantalla
+			cursor(60, i);
+			cout<<"|";
+		}
+		cursor(0,-1);
+		escribir("[esp=120][line=-]"); //Foot
+		escribir("\n[esp=48]Gino Casentini @2023-2023");
+		cursor(62, 3);
+		escribir("[esp=58][line==]");
+		cursor(83,2);
+		cout<<"\033[1;36mSTOCK DISPONIBLE\033[0m\n";	
 	}
-	cursor(0,9);
-	for(int i = 0; i<categorias.size(); i++){
-		printf("\033[2K - \x1B[36m%s\n\033[2K\033[0m", categorias[i].c_str());
-	}
-	cout<<" - \033[1;32mVolver\033[0m";
-	for(int i = 0; i<30; i++){ //Division de pantalla
-		cursor(60, i);
-		cout<<"|";
-	}
-	cursor(0,-1);
-	escribir("[esp=120][line=-]"); //Foot
-	escribir("\n[esp=48]Gino Casentini @2023-2023");
-	cursor(62, 3);
-	escribir("[esp=58][line==]");
-	cursor(83,2);
-	cout<<"\033[1;36mSTOCK DISPONIBLE\033[0m\n";
 	vector<Producto> productos = get_products_in_category(from_category);
-	int page = 1;
 	int limit_y = update_products(productos, page); //Show products
 	int lasty = opty;
 	do{
@@ -120,11 +122,21 @@ void update_menu(string from_category){
 			if(opty == 5){
 				if(page == ceil(productos.size() / 8.0)){
 					opty = 0;
+					opt = 0;
+					printf(" -");
 					continue;	
 				}
 				page++;
-				opty = 3;
 				limit_y = update_products(productos, page);
+				opt = (opt+1) > ceil(limit_y / 2) ? ceil(limit_y / 2)-1 : opt;
+				opty = 3;
+			}
+			if(opty == 2){
+				if(page != 1){
+					page--;
+					opty = 4;
+					limit_y = update_products(productos, page);
+				}
 			}
 		}else{
 			if(opt != 0){
@@ -172,8 +184,9 @@ void update_menu(string from_category){
 		return;
 	}
 	if(opty > 2){
-		product_info(productos[(opty-3) + 2 * opt]);
-		return update_menu(from_category);
+		int id = (page - 1) * 8 + (opty-3) + 2 * opt;
+		product_info(productos[id]);
+		return update_menu(from_category, page, false);
 	}
 	done = false;
 	int lastx = opt;
@@ -188,7 +201,7 @@ void update_menu(string from_category){
 		printf(" -");
 		done = last_char == '\r';
 		if((lastx == 0 && last_char == 72) || lastx == categorias.size() && last_char == 80){
-			return update_menu(from_category);
+			return update_menu(from_category, page, false);
 		}
 	}while(!done);
 	string mayus, update;
@@ -213,7 +226,7 @@ void update_menu(string from_category){
 		cursor(13,2);
 		printf("\033[2K\033[1;34mSTOCKMANAGER - MENÚ PRINCIPAL\033[0m", mayus.c_str());
 	}
-	update_menu(update);
+	update_menu(update, 1, true);
 }
 
 void product_info(Producto product){
