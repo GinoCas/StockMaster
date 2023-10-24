@@ -7,6 +7,10 @@ hardware{
 		"amd";5;"Jasjdjas";"descripcion";
 		"gtx";5;"XDE";"descripcion";
 		"amd";5;"Jasjdjas";"descripcion";
+		"xd";5;"Jasjdjas";"descripcion";
+		"pag 2";5;"Jasjdjas";"descripcion";
+		"pag 2 xd";5;"Jasjdjas";"descripcion";
+		"no se";5;"Jasjdjas";"descripcion";
 	}
 }
 software{
