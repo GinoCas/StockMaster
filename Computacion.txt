@@ -1,0 +1,17 @@
+hardware{
+"test";0;ssfdgsdfugdfsgds;iasuhdiuhfdsaguihdfsaguihdsfuihgiuhsdfg;
+	Placas de video{
+		"nvidia";5;"Gino Casentini";"descripción";
+		"rx";5;"Pedrito";"descripcion";
+		"gtx";5;"XDE";"descripcion";
+		"amd";5;"Jasjdjas";"descripcion";
+		"gtx";5;"XDE";"descripcion";
+		"amd";5;"Jasjdjas";"descripcion";
+	}
+}
+software{
+	Microsoft{
+		"Windows 10";5;"Te veo";"fdgsdfgdsfgdfg";
+	}
+
+}
