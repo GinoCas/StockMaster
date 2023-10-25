@@ -34,19 +34,30 @@ int update_products(vector<Producto> productos, int page){
 			escribir("[esp=58][line=-]");
 		}
 	}
+	cursor(85, 25);
+	cout<<" ";
 	if(productos.size() > 8){
 		cursor(87, 25);
-		//cout<<productos[11].persona;
+		if(page != 1){
+			cursor(85, 25);
+			cout<<"<";
+			cursor(87, 25);
+		}
 		cout<<page<<"/"<<ceil(productos.size() / 8.0);
+		if(page != ceil(productos.size() / 8.0)){
+			cout<<" >";
+		}else{
+			cout<<"  ";
+		}
 	}
 	return limit_y;
 }
-void update_menu(string from_category, int page, bool update){
+void update_menu(string from_category, int page, bool upd){
 	bool done = false;
 	opt = 0;
 	opty = 0;
 	vector<string> categorias = get_category_list(from_category);
-	if(update){
+	if(upd){
 		for(int i = 0; i<30; i++){
 		cursor(0, 9+i);
 		escribir("[esp=50]");
@@ -73,10 +84,6 @@ void update_menu(string from_category, int page, bool update){
 	int limit_y = update_products(productos, page); //Show products
 	int lasty = opty;
 	do{
-		cursor(0, 25);
-		cout<<"    ";
-		cursor(0, 25);
-		cout<<categorias.size()<<endl;
 		switch(opty){
 			case 0:
 				cursor(0, 5);
@@ -124,18 +131,20 @@ void update_menu(string from_category, int page, bool update){
 					opty = 0;
 					opt = 0;
 					printf(" -");
-					continue;	
+					continue;
 				}
 				page++;
-				limit_y = update_products(productos, page);
-				opt = (opt+1) > ceil(limit_y / 2) ? ceil(limit_y / 2)-1 : opt;
 				opty = 3;
+				limit_y = update_products(productos, page);
+				opt = (opt+1) > ceil(limit_y / 2.0) ? ceil(limit_y / 2.0)-1 : opt;
+				cursor(61, 5 + opt * 5);
 			}
 			if(opty == 2){
 				if(page != 1){
 					page--;
 					opty = 4;
 					limit_y = update_products(productos, page);
+					cursor(61, 5 + opt * 5);
 				}
 			}
 		}else{
@@ -143,7 +152,7 @@ void update_menu(string from_category, int page, bool update){
 				done = true;
 				opt = 0;
 				opty = -1;
-				printf("   ");
+				printf("    ");
 				continue;
 			}
 			change_option_two_dim(4, 1);	
@@ -258,12 +267,13 @@ void product_info(Producto product){
 
 void add_product(string in_category){
 	int line;
+	empty_section(0, 4, 25, 59);
 	cursor(0,2);
 	escribir("[esp=59]");
-	for(int i = 4; i<56; i++){
+	/*<<for(int i = 4; i<56; i++){
 		cursor(0,i);
 		escribir("[esp=59]");	
-	}
+	}*/
 	cursor(20,2);
 	printf("AGREGAR PRODUCTO\n ");
 	cursor(0,5);
@@ -277,7 +287,7 @@ void add_product(string in_category){
 		switch(opt){
 			case 0:
 				cursor(10+product.nombre.length(),5);
-				product.nombre = input_text(product.nombre, 49, 3, '\0', 50, 10, 5);
+				product.nombre = input_text(product.nombre, 48, 3, '\0', 50, 10, 5);
 			break;
 			case 1:
 				cursor(9,6);

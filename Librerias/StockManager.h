@@ -7,7 +7,7 @@ int get_category(string category, bool stop_on_category){
 	
 	string current_category = "", texto = "";
 	int current_line = 0;
-	bool on_quotes = false, found_category = false;
+	bool found_category = false;
 	char letra;
 	
 	while(!feof(archivo)){
@@ -32,23 +32,16 @@ int get_category(string category, bool stop_on_category){
 			continue;
 			case '}':
 				if(ult_barra != string::npos){
-					if(found_category){
-					}
 					found_category = current_category == category && found_category ? false : found_category;
 					current_category.erase(ult_barra);
 				}
 			continue;
 			case '"':
-				on_quotes = !on_quotes;
-				if(!on_quotes && found_category){
-				}
 				texto = "";	
 			continue;
 			case ';':
-				if(!on_quotes){
-					continue;
-				}
-			break;
+				texto = "";
+			continue;
 		}
 		texto += letra;
 	}
@@ -86,7 +79,7 @@ vector<string> get_category_list(string category){
 				texto = "";
 			continue;
 			case ';':
-				texto = "";	
+				texto = "";
 			continue;
 		}
 		texto += letra;

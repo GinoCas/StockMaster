@@ -130,7 +130,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
 	int before = 0;
 	while((carac = getch()) != '\r'){
-		if(carac == ' '){
+		if(carac == ' ' && carac_idx < char_limit){
 			if(carac_idx == 0){
 				continue;
 			}
@@ -180,6 +180,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 			continue;
 		}
 		if(last_word.length() > 19 && (carac_idx+1) % x_end == 0){
+			cout<<carac_idx;
 			continue;
 		}
 		last_char = carac;
@@ -193,7 +194,9 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 		if(carac_idx > char_limit-1 || carac == '\t'){
 			continue;
 		}
-		
+		if(carac_idx >= char_limit){
+			continue;
+		}
 		if(carac != ' '){
 			last_word += carac;
 		}
@@ -205,7 +208,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 			cout<<show;
 		}
 		cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
-		if(carac_idx % 44 == 0){
+		if(carac_idx % x_end == 0){
 			if(text[carac_idx-1] != ' '){
 				cursor(x_start + x_end - last_word.length(), y_start + ceil(carac_idx / x_end) - 1);
 				for(int i = 0; i<last_word.length(); i++){

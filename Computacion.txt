@@ -1,6 +1,11 @@
 hardware{
-"test";0;ssfdgsdfugdfsgds;iasuhdiuhfdsaguihdfsaguihdsfuihgiuhsdfg;
+"abc";0;fdsaggsd;abc;
+"jejejejejejjdsaf";0;asdasd;xd xdasdsadfsdaf descripocion larga;
+"asdfsadfsadfasdfasdfasdfasdfsfgdhkpofdsgpokdsfgp";0;asdasd;afdsadfsadfasdf;
 	Placas de video{
+"abc";0;asdasd;abc;
+"abc";0;asdasd;abc;
+"Majdsfioasdfasdfk";0;asdasd;gfhjkopdfghkop dfghkopfdghkdfgh;
 		"nvidia";5;"Gino Casentini";"descripción";
 		"rx";5;"Pedrito";"descripcion";
 		"gtx";5;"XDE";"descripcion";
@@ -14,8 +19,11 @@ hardware{
 	}
 }
 software{
+"dasfsadfsadfasdf";2103;asdasd;adsfasdf;
 	Microsoft{
+"abc";0;asdfasdf;abc;
 		"Windows 10";5;"Te veo";"fdgsdfgdsfgdfg";
 	}
+
 
 }
