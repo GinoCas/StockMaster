@@ -119,7 +119,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	string last_word = "";
 	vector<string> word_list; //lista de palabras
 	for(int i = 0; i<text.length(); i++){
-		if(text[i] != '_' && text[i] != ' '){
+		if(text[i] != '\\' && text[i] != ' '){
 			last_word += text[i];	
 		}
 		if(text[i] == ' '){
@@ -130,6 +130,9 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
 	int before = 0;
 	while((carac = getch()) != '\r'){
+		if(carac == '\\'){
+			continue;
+		}
 		if(carac == ' ' && carac_idx < char_limit){
 			if(carac_idx == 0){
 				continue;
@@ -155,7 +158,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				last_word = last_word.substr(0, last_word.length()-1);
 			}
 			text = text.substr(0, text.length()-1);
-			if(text[carac_idx-1] == '_'){
+			if(text[carac_idx-1] == '\\'){
 				cursor(x_start, -1);
 				for(int i = 0; i<last_word.length(); i++){
 					cout<<" ";
@@ -163,7 +166,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				}
 				text = text.substr(0, text.length() - last_word.length() - 1);
 				carac_idx -= last_word.length()+1;
-				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 60, 50);
+				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 25-(y_start + 1 + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
@@ -172,7 +175,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				continue;
 			}
 			if(before != ceil(carac_idx/x_end)){
-				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 60, 50);
+				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 25-(y_start + 1 + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
@@ -215,10 +218,10 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 					cout<<" ";
 				}
 				for(int i = 0; i<last_word.length(); i++){
-					text += "_";
+					text += '\\';
 				}
 				carac_idx += last_word.length();
-				empty_section(0, y_start + ceil(carac_idx / x_end), 60, 50);
+				empty_section(0, y_start + ceil(carac_idx / x_end), 25-(y_start + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start, y_start + ceil(carac_idx / x_end));
@@ -227,7 +230,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				continue;
 			}
 			if(before != ceil(carac_idx / x_end)){
-				empty_section(0, y_start + ceil(carac_idx / x_end), 60, 50);
+				empty_section(0, y_start + ceil(carac_idx / x_end), 25-(y_start + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start, y_start + ceil(carac_idx / x_end));
@@ -265,4 +268,10 @@ int input_number(int num, int num_max, int opt_limit){
 		}
     }
     return num;
+}
+void show_text_in_margin(string text, int x_start, int x_end, int y_start){
+	for(int i = 0; i<text.length(); i++){
+		cursor(x_start + i % x_end, y_start + ceil(i / x_end));
+		cout<<text[i];
+	}
 }

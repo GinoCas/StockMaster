@@ -1,14 +1,8 @@
 hardware{
-"abc";0;fdsaggsd;abc;
-"jejejejejejjdsaf";0;asdasd;xd xdasdsadfsdaf descripocion larga;
-"asdfsadfsadfasdfasdfasdfasdfsfgdhkpofdsgpokdsfgp";0;asdasd;afdsadfsadfasdf;
 	Placas de video{
-"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk";0;dfgsdfg;xd;
-"abc";0;asdasd;abc;
-"abc";0;asdasd;abc;
-"Majdsfioasdfasdfk";0;asdasd;gfhjkopdfghkop dfghkopfdghkdfgh;
-		"nvidia";5;"Gino Casentini";"descripción";
-		"rx";5;"Pedrito";"descripcion";
+"xd";0;adsfasd;"adsfkopasdf pokasdfpok asdpokf asdopkf dfgs\\\\\dfg_ _SDFG_SDF_G _SDFG_Dsfg ";
+"abc";0;asdfasdf;"asjioadfs jasdfjasdfji asdfjiasdfj asdjfi _mm____ sadfdsaf";
+		"rx";5;"Pedrito";"descripcion ñ";
 		"gtx";5;"XDE";"descripcion";
 		"amd";5;"Jasjdjas";"descripcion";
 		"gtx";5;"XDE";"descripcion";
@@ -20,10 +14,7 @@ hardware{
 	}
 }
 software{
-"asdfasdf";0;asdfasdf;xdasdasd;
-"dasfsadfsadfasdf";2103;asdasd;adsfasdf;
 	Microsoft{
-"abc";0;asdfasdf;abc;
 		"Windows 10";5;"Te veo";"fdgsdfgdsfgdfg";
 	}
 
