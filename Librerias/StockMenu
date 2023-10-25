@@ -256,14 +256,14 @@ void product_info(Producto product){
 	cursor(62, 8);
 	cout<<"\033[0m>\x1B[36m Stock: "<<product.stock<<" unidades";
 	cursor(62, 9);
-	cout<<"\033[0m>\x1B[36m Descripción:";
-	show_text_in_margin(product.descripcion, 77, 44, 9);
+	//cout<<"\033[0m>\x1B[36m Descripción:";
+	show_text_in_margin(product.descripcion, 70, 44, 9);
 	cursor(62, 10 + ceil(product.descripcion.length() / 44));
 	cout<<"\033[0m>\x1B[36m Cargado por: "<<product.persona<<"\033[0m";
 	cursor(62, 12 + ceil(product.descripcion.length() / 44));
 	cout<<"Presione una tecla para volver...";
 	getch();
-	empty_section(62, 5, 20, 60);
+	empty_section(62, 5, 24, 60);
 	cursor(62,2);
 	cout<<"\033[K";
 }

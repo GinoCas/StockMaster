@@ -1,5 +1,7 @@
 hardware{
 	Placas de video{
+"Descripcion larga con nombre largo jajaja xd s2";30;asdfasdf;"Contrary to popular belief, Lorem Ipsum is \not simply random text. It has roots in a p\\iece of classical Latin literature from 45 BC, making it over 2000 years old. Richard \McClintock, a Latin professor at Hampden-Sy\\\\\\\\\\\dney College in Virginia, looked \up one of the more obscure Latin words, con\\\\sectetur, from a Lorem Ipsum passage, an\\\d going through the cites of the word in \classical literature, discovered the undoub\\\\\\\table source. Lorem Ipsum comes from \sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good a\\nd Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The fi\\\rst line of Lorem Ipsum, "Lorem ipsum dol\\\\or sit amet..", comes from a line in sec\\\\tion";
+"test";0;sdfgdfs;"asdfsadfoasd fplsdflpsdplf`asd adsfasdf asd\\\\fasdfasdfasdfadf";
 "xd";0;adsfasd;"adsfkopasdf pokasdfpok asdpokf asdopkf dfgs\\\\\dfg_ _SDFG_SDF_G _SDFG_Dsfg ";
 "abc";0;asdfasdf;"asjioadfs jasdfjasdfji asdfjiasdfj asdjfi _mm____ sadfdsaf";
 		"rx";5;"Pedrito";"descripcion ñ";

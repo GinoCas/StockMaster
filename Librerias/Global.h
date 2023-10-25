@@ -2,7 +2,7 @@
 #include <vector>
 #include <string.h>
 #include <cmath>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -166,7 +166,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				}
 				text = text.substr(0, text.length() - last_word.length() - 1);
 				carac_idx -= last_word.length()+1;
-				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 25-(y_start + 1 + ceil(carac_idx / x_end)), 50);
+				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 27-(y_start + 1 + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
@@ -175,7 +175,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				continue;
 			}
 			if(before != ceil(carac_idx/x_end)){
-				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 25-(y_start + 1 + ceil(carac_idx / x_end)), 50);
+				empty_section(0, y_start + 1 + ceil(carac_idx / x_end), 27-(y_start + 1 + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
@@ -221,7 +221,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 					text += '\\';
 				}
 				carac_idx += last_word.length();
-				empty_section(0, y_start + ceil(carac_idx / x_end), 25-(y_start + ceil(carac_idx / x_end)), 50);
+				empty_section(0, y_start + ceil(carac_idx / x_end), 27-(y_start + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start, y_start + ceil(carac_idx / x_end));
@@ -230,7 +230,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 				continue;
 			}
 			if(before != ceil(carac_idx / x_end)){
-				empty_section(0, y_start + ceil(carac_idx / x_end), 25-(y_start + ceil(carac_idx / x_end)), 50);
+				empty_section(0, y_start + ceil(carac_idx / x_end), 27-(y_start + ceil(carac_idx / x_end)), 50);
 				cursor(0, y_start + ceil(carac_idx / x_end));
 				cout<<after_text;
 				cursor(x_start, y_start + ceil(carac_idx / x_end));
@@ -270,8 +270,35 @@ int input_number(int num, int num_max, int opt_limit){
     return num;
 }
 void show_text_in_margin(string text, int x_start, int x_end, int y_start){
+	string last_word = "";
+	int before, carac_idx = 0;
+	string use_text = "";
 	for(int i = 0; i<text.length(); i++){
-		cursor(x_start + i % x_end, y_start + ceil(i / x_end));
-		cout<<text[i];
+		if(text[i] == '\\'){
+			continue;
+		}
+		use_text += text[i];
+	}
+	for(int i = 0; i<use_text.length(); i++){
+		before = ceil(carac_idx / x_end);
+		cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
+		cout<<use_text[i];
+		carac_idx++;
+		if(carac_idx % x_end == 0){
+			if(use_text[carac_idx-1] != ' '){
+				cursor(x_start + x_end - last_word.length(), y_start + ceil(carac_idx / x_end) - 1);
+				for(int i = 0; i<last_word.length(); i++){
+					cout<<" ";
+				}
+				for(int i = 0; i<last_word.length(); i++){
+					text += '\\';
+				}
+				carac_idx += last_word.length();
+				cursor(x_start, y_start + ceil(carac_idx / x_end));
+				cout<<last_word;
+				continue;
+			}
+		}
+	
 	}
 }
