@@ -241,7 +241,8 @@ void update_menu(string from_category, int page, bool upd){
 }
 
 void product_info(Producto product){
-	cursor(83,2);
+	cursor(85, 25);
+	cout<<"       ";
 	cout<<"\033[K";
 	string nomb_mayus = mayus_transform(product.nombre);
 	cursor(60 + (26-nomb_mayus.length()/2),2);
@@ -256,11 +257,11 @@ void product_info(Producto product){
 	cursor(62, 8);
 	cout<<"\033[0m>\x1B[36m Stock: "<<product.stock<<" unidades";
 	cursor(62, 9);
-	//cout<<"\033[0m>\x1B[36m Descripción:";
-	show_text_in_margin(product.descripcion, 70, 44, 9);
+	cout<<"\033[0m>\x1B[36m Descripción:";
+	show_text_in_margin(product.descripcion, 77, 44, 9);
 	cursor(62, 10 + ceil(product.descripcion.length() / 44));
 	cout<<"\033[0m>\x1B[36m Cargado por: "<<product.persona<<"\033[0m";
-	cursor(62, 12 + ceil(product.descripcion.length() / 44));
+	cursor(62, 11 + ceil(product.descripcion.length() / 44));
 	cout<<"Presione una tecla para volver...";
 	getch();
 	empty_section(62, 5, 24, 60);
@@ -301,7 +302,7 @@ void add_product(string in_category){
 			break;
 			case 2:
 				after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario + "\033[1;37m\n                   Agregar    Cancelar\033[1;33m";
-				product.descripcion = input_text(product.descripcion, 800, 3, '\0', 44, 15, 7);
+				product.descripcion = input_text(product.descripcion, 790, 3, '\0', 44, 15, 7);
 			break;
 			case 3:
 				line_desc = 9 + ceil(product.descripcion.length() / 44);

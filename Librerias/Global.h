@@ -183,7 +183,6 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 			continue;
 		}
 		if(last_word.length() > 19 && (carac_idx+1) % x_end == 0){
-			cout<<carac_idx;
 			continue;
 		}
 		last_char = carac;
@@ -282,22 +281,25 @@ void show_text_in_margin(string text, int x_start, int x_end, int y_start){
 	for(int i = 0; i<use_text.length(); i++){
 		before = ceil(carac_idx / x_end);
 		cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
+		if(use_text[i] != ' '){
+			last_word += use_text[i];
+		}else{
+			last_word = "";
+		}
 		cout<<use_text[i];
 		carac_idx++;
 		if(carac_idx % x_end == 0){
-			if(use_text[carac_idx-1] != ' '){
-				cursor(x_start + x_end - last_word.length(), y_start + ceil(carac_idx / x_end) - 1);
-				for(int i = 0; i<last_word.length(); i++){
-					cout<<" ";
-				}
-				for(int i = 0; i<last_word.length(); i++){
-					text += '\\';
-				}
-				carac_idx += last_word.length();
-				cursor(x_start, y_start + ceil(carac_idx / x_end));
-				cout<<last_word;
-				continue;
+			cursor(x_start + x_end - last_word.length(), y_start + ceil(carac_idx / x_end) - 1);
+			for(int i = 0; i<last_word.length(); i++){
+				cout<<" ";
 			}
+			for(int i = 0; i<last_word.length(); i++){
+				text += '\\';
+			}
+			carac_idx += last_word.length();
+			cursor(x_start, y_start + ceil(carac_idx / x_end));
+			cout<<last_word;
+			continue;
 		}
 	
 	}
