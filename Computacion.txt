@@ -1,4 +1,5 @@
 hardware{
+"sadfasdfasdf";0;gino;"asdfasdfasdf";
 	Placas de video{
 		"rx";5;"Pedrito";"descripcion ñ";
 		"gtx";5;"XDE";"descripcion";
