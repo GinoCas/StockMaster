@@ -13,7 +13,7 @@ struct StockMenu{
 };
 
 StockMenu menu;
-void update_menu(int), product_info(Producto), add_product(), my_products(vector<Producto>), edit_product(Producto);
+void update_menu(int), product_info(Producto, bool), add_product(), my_products(vector<Producto>), edit_product(Producto);
 
 void menu_principal(bool from_login){
 	system("cls");
@@ -247,7 +247,7 @@ void update_menu(int upd){
 	}
 	if(opty > 2){
 		int id = (menu.productPage - 1) * 8 + (opty-3) + 2 * opt;
-		product_info(productos[id]);
+		product_info(productos[id], true);
 		return update_menu(1);
 	}
 	done = false;
@@ -303,33 +303,34 @@ void update_menu(int upd){
 	update_menu(true);
 }
 
-void product_info(Producto product){
-	cursor(85, 25);
-	cout<<"       ";
-	cout<<"\033[K";
-	string nomb_mayus = mayus_transform(product.nombre);
-	cursor(62,2);
-	escribir("[esp=50]");
-	cursor(60 + (26-nomb_mayus.length()/2),2);
-	cout<<"\033[1;36mPRODUCTO: "<<nomb_mayus<<"\033[0m\n";
-	empty_section(62, 5, 20, 60);
-	cursor(62, 5);
-	cout<<"\033[1;33mCaracteristicas\033[0m";
-	cursor(62,6);
-	escribir("[esp=20][line=-]");
-	cursor(62, 7);
-	cout<<"\033[0m>\x1B[36m Categoría: "<<product.categoria;
-	cursor(62, 8);
-	cout<<"\033[0m>\x1B[36m Stock: "<<product.stock<<" unidades";
-	cursor(62, 9);
-	cout<<"\033[0m>\x1B[36m Descripción:";
-	show_text_in_margin(product.descripcion, 77, 44, 9);
+void product_info(Producto product, bool upd){
 	const int line = ceil(product.descripcion.length() / 44);
-	cursor(62, 10 + line);
-	cout<<"\033[0m>\x1B[36m Cargado por: "<<product.persona<<"\033[0m";
+	if(upd){
+		cursor(85, 25);
+		cout<<"       ";
+		cout<<"\033[K";
+		string nomb_mayus = mayus_transform(product.nombre);
+		cursor(62,2);
+		escribir("[esp=50]");
+		cursor(60 + (26-nomb_mayus.length()/2),2);
+		cout<<"\033[1;36mPRODUCTO: "<<nomb_mayus<<"\033[0m\n";
+		empty_section(62, 5, 20, 60);
+		cursor(62, 5);
+		cout<<"\033[1;33mCaracteristicas\033[0m";
+		cursor(62,6);
+		escribir("[esp=20][line=-]");
+		cursor(62, 7);
+		cout<<"\033[0m>\x1B[36m Categoría: "<<product.categoria;
+		cursor(62, 8);
+		cout<<"\033[0m>\x1B[36m Stock: "<<product.stock<<" unidades";
+		cursor(62, 9);
+		cout<<"\033[0m>\x1B[36m Descripción:";
+		show_text_in_margin(product.descripcion, 77, 44, 9);
+		cursor(62, 10 + line);
+		cout<<"\033[0m>\x1B[36m Cargado por: "<<product.persona<<"\033[0m";	
+	}
 	cursor(62, 11 + line);
 	escribir("[esp=15]Editar    Eliminar    Volver");
-	bool done = false;
 	int lasty = opty;
 	opty = 0;
 	do{
@@ -353,13 +354,29 @@ void product_info(Producto product){
 		last_char = getch();
 		change_option_y(2);
 		cout<<"  ";
-		done = last_char == '\r';
-	}while(!done);
+		if(last_char == '\r'){ break; }
+	}while(true);
 	switch(opty){
 		case 0:
 			edit_product(product);
 		return update_menu(true);
 		case 1:
+			opty = 0;
+			do{
+				cursor(62, 11 + line);
+				escribir("[esp=50]");
+				cursor(77, 11 + line);
+				cout<<"Estas seguro?   Sí   No";
+				cursor(91 + 5*opty, 11 + line);
+				cout<<">";
+				cursor(90 + 5*opty, 11 + line);
+				last_char = getch();
+				change_option_y(1);
+				if(last_char == '\r'){ break; }
+			}while(true);
+			if(opty == 1){
+				return product_info(product, false);
+			}
 			delet_line_from_file(find_product_in_category(product));
 		break;
 		case 2:
@@ -408,7 +425,7 @@ void my_products(vector<Producto> products){
 	if(opt == count){
 		return menu_principal(false);
 	}
-	product_info(my_products[opt]);
+	product_info(my_products[opt], true);
 	return menu_principal(false);
 }
 void edit_product(Producto product){

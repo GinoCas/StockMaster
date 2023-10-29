@@ -163,7 +163,7 @@ int find_product_in_category(Producto product){
 	//FILE *archivo = fopen("Computacion.txt", "r");  // Reemplaza "mi_archivo.txt" con el nombre de tu archivo
 	ifstream archivo("Computacion.txt");
 	string line = "";
-	string searching_for = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario + ";\"" + product.descripcion +  "\";";
+	string searching_for = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + product.persona + ";\"" + product.descripcion +  "\";";
 	while(getline(archivo, line)){
 		if(line.find(searching_for) != string::npos){
 			return current_line+1;
