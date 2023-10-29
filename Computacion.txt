@@ -1,5 +1,5 @@
 hardware{
-"HAHAHAHA SOY BUENISIMO";1;gino;"fsdgioj ijodsfgjiodsfg jiosdfjoig dsfijogji\\\\\\\\\\o dsfgjiodsfgijo sdfjiog jiodsfgji\\\\\\\\\\o dfjiogsdjiofg ijodsfgijo sdfijog ijosdfg jiosdfgjiosdfijogsd ijofdsfijog jio\\\\dsfgjoi sdfgjoi4tjq3408t q3j4gjqa43reg j\\ioarfdesgjoiafsd ijoasdjoif asijodf ijoasd\\\\\\\f oijasdfoij adfsjiogijaosdfjio asdfj\\\\\\ioasdfjoi asdoijf ijoasdf iojasdfijo a\\sdijof ajosidf ijoasdf joiasdifoj asdijofj\\\\\\\\\iosadf ijoasdfijo asdijof jiaosdf o\\ijasdfoij sdaiojf saoijdf oijasdfoij asdij\\\\\\of aosijdf ojiasdfjo iasdoifjijosad fj\\\ioasdf oijasdjofi asoidjf iojasdf iojasdj\\\\\\\\iof asdijof ijoasdfijoasdfijoasdioja jioasdfiojasdofijoijasdfioj sadfojiasdoijfa\\\\\\\\\\\\\\\\sdoijfoaijsdfojisda oijsafdi\\\\\\\\\josadfjiosajdiofiojsad foijasdfjioa\\\\\\\\\\\\\sjiodfijoasdf ijoasdfojiasijod";
+"HAHAHAHA SOY BUENISIMO XDDDDDDDDDDDDDDDDDDDD";1;gino;"xd";
 "sadfasdfasdf";0;gino;"asdfasdfasdf";
 	Placas de video{
 		"rx";5;Pedrito;"descripcion ñ";
@@ -23,3 +23,6 @@ software{
                            
                                    
               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+   
+ 
