@@ -47,7 +47,7 @@ int get_category(string category, bool stop_on_category){
 	}
 	return current_line;
 }
-vector<string> get_category_list(string category){
+vector<string> get_category_list(string category, bool all){
 	FILE * archivo;
 	archivo = fopen("Computacion.txt", "rt");
 	string current_category = "", texto = "";
@@ -69,8 +69,12 @@ vector<string> get_category_list(string category){
 					found_category = without_slash.erase(ult_barra) == category ? true : false;
 				}
 				found_category = category == "" && current_category == "" ? true : found_category;
-				if(found_category){
-					categories.push_back(texto);
+				if(found_category || all){
+					if(all){
+						categories.push_back(current_category);	
+					}else{
+						categories.push_back(texto);
+					}
 				}
 				texto = "";
 			continue;
@@ -187,13 +191,37 @@ void add_text_to_file(string file, string text, int line){
     }
     archivo_escritura.close();
 }
-void replace_text_at_line(string text, int replaceLine){
-	fstream originalFile("Computacion.txt");
+void delet_line_from_file(int deletLine){
+	fstream file("Computacion.txt");
     int current_line = 1;
     string archivText = "";
     string line = "";
     int count = 0;
-    while(getline(originalFile, line)){
+    while(getline(file, line)){
+        if(current_line == deletLine){
+        	count = line.length();
+        }else{
+            archivText += line + "\n";
+        }
+        current_line++;
+    }
+    if(count != 0){
+    	for(int i = 0; i<count; i++){
+    		archivText += " ";
+		}
+	}
+    file.close();
+    file.open("Computacion.txt");
+    file<<archivText;
+    return;
+}
+void replace_text_at_line(string text, int replaceLine){
+	fstream file("Computacion.txt");
+    int current_line = 1;
+    string archivText = "";
+    string line = "";
+    int count = 0;
+    while(getline(file, line)){
         if(current_line == replaceLine){
         	if(line.length() > text.length()){
         		count = line.length() - text.length();
@@ -209,9 +237,9 @@ void replace_text_at_line(string text, int replaceLine){
     		archivText += " ";
 		}
 	}
-    originalFile.close();
-    originalFile.open("Computacion.txt");
-    originalFile<<archivText;
+    file.close();
+    file.open("Computacion.txt");
+    file<<archivText;
     return;
 }
 string cut_text(string text, int limit)

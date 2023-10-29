@@ -1,5 +1,4 @@
 hardware{
-"HAHAHAHA SOY BUENISIMO XDDDDDDDDDDDDDDDDDDDD";1;gino;"xd";
 "sadfasdfasdf";0;gino;"asdfasdfasdf";
 	Placas de video{
 		"rx";5;Pedrito;"descripcion ñ";
@@ -14,11 +13,12 @@ hardware{
 	}
 }
 software{
+"HAHAHAHA SOY BUENISIMO XDDDDDDDDDDDDDDDDDDDD";1;gino;"xd";
 	Microsoft{
+"xd";0;gino;"lllllllllllllllllllllllllllllllllllllllklll lllllllllllllllllllllllllllllllllllllllllll l lllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllll l\\llllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll llllllllllllllllllllllllllllllllllllllllll \lllllllllllllllllllllllllllllllllllllllllll sdaflasdflsad flkasdf lkasdfl asdlf safl f";
 		"Windows 10";5;Te veo;"fdgsdfgdsfgdfg";
 	}
 }
-   
                                
                            
                                    
@@ -26,3 +26,14 @@ software{
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
    
  
+                                                           
+                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                           
+                                                           
+                                                           
+                                                           
+                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                           
