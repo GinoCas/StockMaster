@@ -1,21 +1,25 @@
 hardware{
+"HAHAHAHA SOY BUENISIMO";1;gino;"fsdgioj ijodsfgjiodsfg jiosdfjoig dsfijogji\\\\\\\\\\o dsfgjiodsfgijo sdfjiog jiodsfgji\\\\\\\\\\o dfjiogsdjiofg ijodsfgijo sdfijog ijosdfg jiosdfgjiosdfijogsd ijofdsfijog jio\\\\dsfgjoi sdfgjoi4tjq3408t q3j4gjqa43reg j\\ioarfdesgjoiafsd ijoasdjoif asijodf ijoasd\\\\\\\f oijasdfoij adfsjiogijaosdfjio asdfj\\\\\\ioasdfjoi asdoijf ijoasdf iojasdfijo a\\sdijof ajosidf ijoasdf joiasdifoj asdijofj\\\\\\\\\iosadf ijoasdfijo asdijof jiaosdf o\\ijasdfoij sdaiojf saoijdf oijasdfoij asdij\\\\\\of aosijdf ojiasdfjo iasdoifjijosad fj\\\ioasdf oijasdjofi asoidjf iojasdf iojasdj\\\\\\\\iof asdijof ijoasdfijoasdfijoasdioja jioasdfiojasdofijoijasdfioj sadfojiasdoijfa\\\\\\\\\\\\\\\\sdoijfoaijsdfojisda oijsafdi\\\\\\\\\josadfjiosajdiofiojsad foijasdfjioa\\\\\\\\\\\\\sjiodfijoasdf ijoasdfojiasijod";
 "sadfasdfasdf";0;gino;"asdfasdfasdf";
 	Placas de video{
-		"rx";5;"Pedrito";"descripcion ñ";
-		"gtx";5;"XDE";"descripcion";
-		"amd";5;"Jasjdjas";"descripcion";
-		"gtx";5;"XDE";"descripcion";
-		"amd";5;"Jasjdjas";"descripcion";
-		"xd";5;"Jasjdjas";"descripcion";
-		"pag 2";5;"Jasjdjas";"descripcion";
-		"pag 2 xd";5;"Jasjdjas";"descripcion";
-		"no se";5;"Jasjdjas";"descripcion";
+		"rx";5;Pedrito;"descripcion ñ";
+		"gtx";5;XDE;"descripcion";
+		"amd";5;Jasjdjas;"descripcion";
+		"gtx";5;gino;"descripcion";
+		"amd";5;Jasjdjas;"descripcion";
+		"xd";5;Jasjdjas;"descripcion";
+		"pag 2";5;Jasjdjas;"descripcion";
+		"pag 2 xd";5;Jasjdjas;"descripcion";
+		"no se";5;Jasjdjas;"descripcion";
 	}
 }
 software{
 	Microsoft{
-		"Windows 10";5;"Te veo";"fdgsdfgdsfgdfg";
+		"Windows 10";5;Te veo;"fdgsdfgdsfgdfg";
 	}
-
-
 }
+   
+                               
+                           
+                                   
+              

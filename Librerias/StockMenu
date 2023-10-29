@@ -13,7 +13,7 @@ struct StockMenu{
 };
 
 StockMenu menu;
-void update_menu(int), product_info(Producto), add_product(string), my_products(vector<Producto>);
+void update_menu(int), product_info(Producto), add_product(string), my_products(vector<Producto>), edit_product(Producto);
 
 void menu_principal(bool from_login){
 	system("cls");
@@ -27,13 +27,20 @@ void menu_principal(bool from_login){
 	escribir("[esp=30][line=-]\n");
 	opt = 0;
 	opty = 0;
-	menu.productPage = 1;
-	menu.categoryPage = 1;
-	menu.current_category = "";
+	if(from_login){
+		menu.productPage = 1;
+		menu.categoryPage = 1;
+		menu.current_category = "";	
+	}else if(!menu.current_category.empty()){
+		size_t last_slash = menu.current_category.find_last_of('/');
+		string mayus = mayus_transform(menu.current_category.substr(last_slash + 1));
+		cursor(21-mayus.length()/2,2);
+		printf("\033[2K\033[1;34mCATEGORÍA: %s\033[0m", mayus.c_str());
+	}
 	return update_menu(true);
 }
 void update_products(vector<Producto> productos){
-	empty_section(62, 5, 20, 60);
+	empty_section(62, 5, 24, 60);
 	menu.productLimit = min(8, static_cast<int>(productos.size()) - (menu.productPage - 1) * 8);
 	if(menu.productLimit < 1){
 		menu.productLimit = 0;
@@ -230,7 +237,7 @@ void update_menu(int upd){
 	switch(opty){
 		case 0:
 			my_products(productos);
-		return update_menu(true);
+		return;
 		case 1:
 			add_product(menu.current_category);
 			return menu_principal(false);
@@ -301,6 +308,8 @@ void product_info(Producto product){
 	cout<<"       ";
 	cout<<"\033[K";
 	string nomb_mayus = mayus_transform(product.nombre);
+	cursor(62,2);
+	escribir("[esp=50]");
 	cursor(60 + (26-nomb_mayus.length()/2),2);
 	cout<<"\033[1;36mPRODUCTO: "<<nomb_mayus<<"\033[0m\n";
 	empty_section(62, 5, 20, 60);
@@ -315,11 +324,45 @@ void product_info(Producto product){
 	cursor(62, 9);
 	cout<<"\033[0m>\x1B[36m Descripción:";
 	show_text_in_margin(product.descripcion, 77, 44, 9);
-	cursor(62, 10 + ceil(product.descripcion.length() / 44));
+	const int line = ceil(product.descripcion.length() / 44);
+	cursor(62, 10 + line);
 	cout<<"\033[0m>\x1B[36m Cargado por: "<<product.persona<<"\033[0m";
-	cursor(62, 11 + ceil(product.descripcion.length() / 44));
-	escribir("[esp=20]Editar   Eliminar");
-	getch();
+	cursor(62, 11 + line);
+	escribir("[esp=15]Editar    Eliminar    Volver");
+	bool done = false;
+	opty = 0;
+	do{
+		switch(opty){
+			case 0:
+				cursor(75, 11 + line);
+				cout<<">";
+				cursor(74, 11 + line);
+			break;
+			case 1:
+				cursor(85, 11 + line);
+				cout<<">";
+				cursor(84, 11 + line);
+			break;
+			case 2:
+				cursor(97, 11 + line);
+				cout<<">";
+				cursor(96, 11 + line);
+			break;
+		}
+		last_char = getch();
+		change_option_y(2);
+		cout<<"  ";
+		done = last_char == '\r';
+	}while(!done);
+	switch(opty){
+		case 0:
+			edit_product(product);
+		return;
+		case 1:
+		break;
+		case 2:
+		return;
+	}
 	empty_section(62, 5, 24, 60);
 	cursor(62,2);
 	cout<<"\033[K";
@@ -335,8 +378,8 @@ void my_products(vector<Producto> products){
 		if(products[i].persona != usuario){
 			continue;
 		}
+		cursor(0, 5+count);
 		count++;
-		cursor(0, 5+i);
 		string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
 		cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";
 		my_products.push_back(products[i]);
@@ -357,13 +400,64 @@ void my_products(vector<Producto> products){
 		}
 		last_char = getch();
 		change_option(count);
-		cout<<"  ";
+		cout<<" -";
 		done = last_char == '\r';
 	}while(!done);
 	if(opt == count){
 		return;
 	}
 	product_info(my_products[opt]);
+}
+void edit_product(Producto product){
+	int line = find_product_in_category(product);
+	empty_section(0, 4, 25, 59);
+	cursor(0,2);
+	escribir("[esp=59]");
+	cursor(21,2);
+	printf("EDITAR PRODUCTO\n ");
+	cursor(0,5);
+	cout<<"\033[1;37m Nombre: \033[1;33m"<<product.nombre<<"\n \033[1;37mStock: \033[1;33m"<<product.stock<<"\033[1;37m\n Descripción:\033[1;33m";
+	show_text_in_margin(product.descripcion, 15, 44, 7);
+	after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario + "\033[1;37m\n                      Aceptar    Cancelar\033[1;33m";
+	cout<<after_text;
+	opt = 0, opty = 0;
+	int line_desc = 7;
+	do{
+		switch(opt){
+			case 0:
+				cursor(10+product.nombre.length(),5);
+				product.nombre = input_text(product.nombre, 48, 3, '\0', 50, 10, 5);
+			break;
+			case 1:
+				cursor(9,6);
+				escribir("[esp=10]");
+				cursor(9,6);
+				cout<<product.stock;
+				product.stock = input_number(product.stock, 999999, 3);
+			break;
+			case 2:
+				product.descripcion = input_text(product.descripcion, 790, 3, '\0', 44, 15, 7);
+			break;
+			case 3:
+				line_desc = 9 + ceil(product.descripcion.length() / 44);
+				cursor(20 + opty*11, line_desc);
+				cout<<"->";
+				cursor(20 + opty*11, line_desc);
+				last_char = getch();
+				change_option_two_dim(1,3);
+				cout<<"  ";
+			break;
+		}
+		if(last_char == '\r' && opt == 3){
+			break;
+		}
+	}while(true);
+	cout<<"\033[0m";
+	if(opty == 1){
+		return menu_principal(false);
+	}
+	replace_text_at_line('"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario + ";\"" + product.descripcion +  "\";", line);
+	return menu_principal(false);
 }
 void add_product(string in_category){
 	int line;
@@ -383,7 +477,7 @@ void add_product(string in_category){
 		switch(opt){
 			case 0:
 				cursor(10+product.nombre.length(),5);
-				product.nombre = input_text(product.nombre, 48, 3, '\0', 50, 10, 5);
+				product.nombre = input_text(product.nombre, 45, 3, '\0', 50, 10, 5);
 			break;
 			case 1:
 				cursor(9,6);
@@ -393,14 +487,14 @@ void add_product(string in_category){
 				product.stock = input_number(product.stock, 999999, 3);
 			break;
 			case 2:
-				after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario + "\033[1;37m\n                   Agregar    Cancelar\033[1;33m";
+				after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario + "\033[1;37m\n                      Agregar    Cancelar\033[1;33m";
 				product.descripcion = input_text(product.descripcion, 790, 3, '\0', 44, 15, 7);
 			break;
 			case 3:
 				line_desc = 9 + ceil(product.descripcion.length() / 44);
-				cursor(17 + opty*11, line_desc);
+				cursor(20 + opty*11, line_desc);
 				cout<<"->";
-				cursor(17 + opty*11, line_desc);
+				cursor(20 + opty*11, line_desc);
 				last_char = getch();
 				change_option_two_dim(1,3);
 				cout<<"  ";

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include <stdio.h>
 #include <sstream>

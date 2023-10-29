@@ -125,6 +125,9 @@ vector<Producto> get_products_in_category(string category){
 			continue;
 			case '"':
 				on_quotes = !on_quotes;
+				if(on_quotes == true){
+					texto = "";
+				}
 			continue;
 			case ';':
 				switch(property_count){
@@ -151,7 +154,22 @@ vector<Producto> get_products_in_category(string category){
 	}
 	return products;
 }
+int find_product_in_category(Producto product){
+	int current_line = 0;
+	//FILE *archivo = fopen("Computacion.txt", "r");  // Reemplaza "mi_archivo.txt" con el nombre de tu archivo
+	ifstream archivo("Computacion.txt");
+	string line = "";
+	string searching_for = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario + ";\"" + product.descripcion +  "\";";
+	while(getline(archivo, line)){
+		if(line.find(searching_for) != string::npos){
+			return current_line+1;
+		}
+		current_line++;
+	}
+    archivo.close();
 
+    return -1;
+}
 void add_text_to_file(string file, string text, int line){
 	ifstream archivo_lectura(file);
 	string linea;
@@ -169,7 +187,33 @@ void add_text_to_file(string file, string text, int line){
     }
     archivo_escritura.close();
 }
-
+void replace_text_at_line(string text, int replaceLine){
+	fstream originalFile("Computacion.txt");
+    int current_line = 1;
+    string archivText = "";
+    string line = "";
+    int count = 0;
+    while(getline(originalFile, line)){
+        if(current_line == replaceLine){
+        	if(line.length() > text.length()){
+        		count = line.length() - text.length();
+			}
+            archivText += text + "\n";
+        }else{
+            archivText += line + "\n";
+        }
+        current_line++;
+    }
+    if(count != 0){
+    	for(int i = 0; i<count; i++){
+    		archivText += " ";
+		}
+	}
+    originalFile.close();
+    originalFile.open("Computacion.txt");
+    originalFile<<archivText;
+    return;
+}
 string cut_text(string text, int limit)
 {
 	if(text.length() < 13){
