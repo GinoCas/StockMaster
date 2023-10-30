@@ -13,7 +13,7 @@ struct StockMenu{
 };
 
 StockMenu menu;
-void update_menu(int), product_info(Producto, bool), add_product(), my_products(vector<Producto>), edit_product(Producto);
+void update_menu(int), product_info(Producto, int), add_product(), my_products(vector<Producto>), edit_product(Producto);
 
 void menu_principal(bool from_login){
 	system("cls");
@@ -236,19 +236,17 @@ void update_menu(int upd){
 	}while(!done);
 	switch(opty){
 		case 0:
-			my_products(productos);
-		return;
+		return my_products(productos);
 		case 1:
 			add_product();
-			return menu_principal(false);
+			//return menu_principal(false);
 		break;
 		case 2:
 		return;
 	}
 	if(opty > 2){
 		int id = (menu.productPage - 1) * 8 + (opty-3) + 2 * opt;
-		product_info(productos[id], true);
-		return update_menu(1);
+		return product_info(productos[id], 2); //update_menu(1);
 	}
 	done = false;
 	int lastx = opt;
@@ -303,18 +301,18 @@ void update_menu(int upd){
 	update_menu(true);
 }
 
-void product_info(Producto product, bool upd){
+void product_info(Producto product, int upd){
 	const int line = ceil(product.descripcion.length() / 44);
-	if(upd){
+	if(upd != 0){
 		cursor(85, 25);
 		cout<<"       ";
 		cout<<"\033[K";
 		string nomb_mayus = mayus_transform(product.nombre);
 		cursor(62,2);
-		escribir("[esp=50]");
+		escribir("[esp=59]");
 		cursor(60 + (26-nomb_mayus.length()/2),2);
 		cout<<"\033[1;36mPRODUCTO: "<<nomb_mayus<<"\033[0m\n";
-		empty_section(62, 5, 20, 60);
+		empty_section(62, 5, 24, 60);
 		cursor(62, 5);
 		cout<<"\033[1;33mCaracteristicas\033[0m";
 		cursor(62,6);
@@ -359,14 +357,14 @@ void product_info(Producto product, bool upd){
 	switch(opty){
 		case 0:
 			edit_product(product);
-		return update_menu(true);
+		return;
 		case 1:
 			opty = 0;
 			do{
 				cursor(62, 11 + line);
 				escribir("[esp=50]");
 				cursor(77, 11 + line);
-				cout<<"Estas seguro?   Sí   No";
+				cout<<"Estás seguro?   Sí   No";
 				cursor(91 + 5*opty, 11 + line);
 				cout<<">";
 				cursor(90 + 5*opty, 11 + line);
@@ -378,12 +376,16 @@ void product_info(Producto product, bool upd){
 				return product_info(product, false);
 			}
 			delet_line_from_file(find_product_in_category(product));
-		break;
+		return menu_principal(false);
 		case 2:
-			cursor(62,2);
-			cout<<"\033[K";
 			opty = lasty;
-		return;
+			if(upd == 2){
+				cursor(62,2);
+				cout<<"\033[K";
+				return update_menu(1);
+			}
+			vector<Producto> c_products = get_products_in_category(menu.current_category);
+		return my_products(c_products); //update_menu(1);
 	}
 }
 void my_products(vector<Producto> products){
@@ -392,7 +394,7 @@ void my_products(vector<Producto> products){
 	cursor(22,2);
 	cout<<"MIS PRODUCTOS";
 	int count = 0;
-	vector<Producto> my_products;
+	vector<Producto> c_products;
 	for(int i = 0; i<products.size(); i++){
 		if(products[i].persona != usuario){
 			continue;
@@ -401,7 +403,7 @@ void my_products(vector<Producto> products){
 		count++;
 		string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
 		cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";
-		my_products.push_back(products[i]);
+		c_products.push_back(products[i]);
 	}
 	cursor(0, 5+count);
 	escribir("[esp=24]Volver");
@@ -425,8 +427,7 @@ void my_products(vector<Producto> products){
 	if(opt == count){
 		return menu_principal(false);
 	}
-	product_info(my_products[opt], true);
-	return menu_principal(false);
+	return product_info(c_products[opt], true);
 }
 void edit_product(Producto product){
 	int line = find_product_in_category(product);
@@ -501,7 +502,7 @@ void edit_product(Producto product){
 	}while(true);
 	cout<<"\033[0m";
 	if(opty == 1){
-		return menu_principal(false);
+		return;
 	}
 	last_slash = current_category.find_last_of('/');
 	string current_product = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario + ";\"" + product.descripcion +  "\";";
@@ -519,6 +520,7 @@ void add_product(){
 	vector<string> categories = get_category_list("", true);
 	string current_category = menu.current_category;
 	int last_slash = current_category.find_last_of('/');
+	empty_section(0, 4, 25, 59);
 	cursor(0,2);
 	escribir("[esp=59]");
 	cursor(20,2);
