@@ -276,7 +276,7 @@ void update_menu(int upd){
 		printf(" >");
 		cursor(0, 9+opt);
 		last_char = getch();
-		change_option_two_dim(ceil(menu.categoryLimit / 5), menu.categoryLimit);
+		change_option_two_dim(ceil((menu.categoryLimit-usuario.admin*3) / 5), menu.categoryLimit);
 		printf(" -");
 		done = last_char == '\r';
 		if((lastx == 0 && last_char == 72) || lastx == menu.categoryLimit && last_char == 80){
@@ -295,33 +295,55 @@ void update_menu(int upd){
 		}
 	}else{
 		if(usuario.admin && opt > menu.categoryLimit-4){
-			int last_slash = menu.current_category.find_last_of('/');
-			string categoria = menu.current_category.substr(last_slash + 1);
+			int last_slash;
+			vector<string> category_list = get_category_list("", true);
+			string current_category = category_list[0];
 			if(opt == menu.categoryLimit-3){
 				cursor(0,20);
 				cout<<"Nombre de la categoría:";
-				categoria = input_text("", 20, 0, '\0', 44, 24, 20);
+				current_category = input_text("", 20, 0, '\0', 44, 24, 20);
 			}
 			if(opt == menu.categoryLimit-2){
-				if(menu.current_category.empty()){
+				do{
 					cursor(0,20);
-					cout<<"No hay ninguna categoria seleccionada...";
-					getch();
-					return update_menu(1);
-				}
+					escribir("[esp=59]");
+					cursor(0,20);
+					last_slash = current_category.find_last_of('/');
+					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
+					current_category = select_category();
+					if(last_char == '\r'){
+						break;
+					}
+				}while(true);
 				cursor(0,20);
-				cout<<"Editar categoría:"<<categoria;
-				categoria = input_text(categoria, 20, 0, '\0', 44, 18, 20);
+				escribir("[esp=59]");
+				cursor(0,20);
+				last_slash = current_category.find_last_of('/');
+				string edited_cat = current_category.substr(last_slash + 1);
+				cout<<"Editar categoría: "<<edited_cat;
+				edited_cat = input_text(edited_cat, 20, 0, '\0', 44, 19, 20);
+				int line = get_category(current_category, true);
+				replace_text_at_line(edited_cat + "{", line+1);
 			}
 			if(opt == menu.categoryLimit-1){
-				if(menu.current_category.empty()){
+				do{
 					cursor(0,20);
-					cout<<"No hay ninguna categoria seleccionada...";
-					getch();
-					return update_menu(1);
-				}
+					escribir("[esp=59]");
+					cursor(0,20);
+					last_slash = current_category.find_last_of('/');
+					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
+					current_category = select_category();
+					if(last_char == '\r'){
+						break;
+					}
+				}while(true);
+				empty_section(0, 19, 3, 59);
+				last_slash = current_category.find_last_of('/');
+				cursor(0,19);
+				cout<<"Selección: \x1B[36m"<<current_category.substr(last_slash + 1)<<"\033[0m";
 				cursor(0,20);
 				cout<<"¿Estás seguro que quieres eliminar esta categoría?"<<endl<<"\033[1;31mSe borraran las subcategorías y productos dentro de esta.\033[0m";
+				opty = 0;
 				do{
 					cursor(23,22);
 					cout<<"Sí   No";
@@ -333,6 +355,11 @@ void update_menu(int upd){
 					if(last_char == '\r'){ break; }
 					cout<<"  ";
 				}while(true);
+				if(opty == 1){
+					return update_menu(1);
+				}
+				int line = get_category(current_category, true);
+				delet_line_from_file(line+1);
 			}
 			return update_menu(1);
 		}

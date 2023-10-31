@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int get_category(string category, bool stop_on_category){
+int get_category(string category, int stop){
 	FILE * archivo;
 	archivo = fopen("Computacion.txt", "rt");
 	
@@ -24,13 +24,16 @@ int get_category(string category, bool stop_on_category){
 				current_category = current_category + "/" + texto;
 				found_category = current_category == category && !found_category ? true : found_category;
 				if(found_category){
-					if(stop_on_category){
+					if(stop == 1){
 						return current_line;
 					}
 				}
 				texto = "";
 			continue;
 			case '}':
+				if(stop == 2 && found_category){
+					return current_line;
+				}
 				if(ult_barra != string::npos){
 					found_category = current_category == category && found_category ? false : found_category;
 					current_category.erase(ult_barra);
@@ -215,6 +218,9 @@ void delet_line_from_file(int deletLine){
     file<<archivText;
     return;
 }
+void delet_category(string category){
+	get_category(category, false);
+}
 void replace_text_at_line(string text, int replaceLine){
 	fstream file("Computacion.txt");
     int current_line = 1;
@@ -269,4 +275,18 @@ string cut_text(string text, int limit)
 		resultado += text[i];
 	}
 	return resultado;
+}
+string select_category(){
+	vector<string> category_list = get_category_list("", true);
+	string current_category = "";
+	for(int i = 0; i<category_list.size(); i++){
+		if(category_list[i] == current_category){
+			opty = i;
+			break;
+		}
+	}
+	last_char = getch();
+	change_option_y(category_list.size()-1);
+	current_category = category_list[opty];
+	return current_category;
 }

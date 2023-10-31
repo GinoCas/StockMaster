@@ -1,7 +1,6 @@
 hardware{
 "xd";1;gino;"lllllllllllllllllllllllllllllllllllllllklll lllllllllllllllllllllllllllllllllllllllllll l lllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllll l\\llllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll lllllllllllllllllllllllllllllllllllllllllll llllllllllllllllllllllllllllllllllllllllll \lllllllllllllllllllllllllllllllllllllllllll sdaflasdflsad flkasdf lkasdfl asdlf safl f";
-"gtx pero por alguna razon es de microsoft xd";5;gino;"lol";
-	Placas de video{
+Placas de video{
 		"gtx";5;XDE;"descripcion";
 		"amd";5;Jasjdjas;"descripcion";
 		"amd";5;Jasjdjas;"descripcion";
@@ -13,7 +12,10 @@ software{
 	Microsoft{
 		"Windows 10";5;Te veo;"fdgsdfgdsfgdfg";
 	}
-}      
+}
+test{
+
+}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
    
  
@@ -55,3 +57,8 @@ software{
              
                       
                                           
+                                           
+          
+         
+    
+     
