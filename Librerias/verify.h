@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <ctype.h>
+#include <vector>
 
 using namespace std;
 int userchar, passchar;
@@ -63,6 +64,8 @@ bool check_pass(string pass, int _passchar){
 
 void send_error(string err){
 	cursor(0,5);
+	escribir("[esp=50]");
+	cursor(0,5);
 	if(err == "simbol"){
 		cout<<"\033[1;31mSimbolos, numeros y espacios no estan permitidos.\033[0m";
 		return;
@@ -85,6 +88,10 @@ void send_error(string err){
 	}
 	if(err == "surpass"){
 		cout<<"\033[1;31mLo ingresado supera el limite de caracteres.\033[0m";
+		return;
+	}
+	if(err == "user_exist"){
+		cout<<"\033[1;31mEl nombre de usuario ingresado ya existe. Por favor, ingrese uno diferente.\033[0m";
 		return;
 	}
 	cout<<"\033[1;31m"<<err<<"\033[0m";

@@ -27,6 +27,48 @@ struct Producto{
 	int stock = 0;
 	
 };
+
+struct user{
+	string name = "";
+	string password = "";
+	bool admin = false;
+};
+
+vector<user> get_users(){
+	FILE * archivo;
+	archivo = fopen("Cuentas.txt", "rt");
+	string text = "";
+	int count = 0;
+	vector<user> users;
+	user current_user;
+	while(!feof(archivo)){
+		char letra = fgetc(archivo);
+		if(letra == '\n'){
+			count = 0;
+			users.push_back(current_user);
+			text = "";
+			continue;
+		}
+		if(letra == ';'){
+			switch(count){
+				case 0:
+					current_user.name = text;
+				break;
+				case 1:
+					current_user.password = text;
+				break;
+				case 2:
+					current_user.admin = text == "AdminGC";
+				break;
+			}
+			count++;
+			text = "";
+			continue;
+		}
+		text += letra;
+	}
+	return users;
+}
 void change_option(int max_limit){
 	if(last_char != -32){
 		return;
@@ -45,7 +87,6 @@ void change_option(int max_limit){
 		break;
 	}
 }
-
 string delet_carac_from_s(string word, char special_carac){
 	string result = "";
 	for(char& carac : word){
@@ -59,6 +100,12 @@ string delet_carac_from_s(string word, char special_carac){
 string mayus_transform(string word){
 	for(char& carac : word){
 		carac = toupper(carac);
+	}
+	return word;
+}
+string minus_transform(string word){
+	for(char& carac : word){
+		carac = tolower(carac);
 	}
 	return word;
 }

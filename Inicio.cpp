@@ -51,12 +51,6 @@ void inicio(){
 		while(carac != -32 && carac != '\r'){
 			carac = getch();
 		}
-		if(opt == 1 && carac == '\r'){
-			cursor(0,20);
-			cout<<"no fue hecho aun :(";
-			carac = '.';
-			continue;
-		}
 		if(carac == '\r'){
 			break;
 		}
@@ -67,11 +61,12 @@ void inicio(){
 	}while(true);
 	switch(opt){
 		case 0:
-			inicio_de_sesion();
+			inicio_sesion(false);
 		return inicio();
 		case 1:
+			inicio_sesion(true);
 			//Registrarse
-		break;
+		return inicio();
 		case 2:
 			exit(EXIT_SUCCESS);
 	}

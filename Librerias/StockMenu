@@ -239,7 +239,7 @@ void update_menu(int upd){
 		return my_products(productos);
 		case 1:
 			add_product();
-			//return menu_principal(false);
+			return menu_principal(false);
 		break;
 		case 2:
 		return;
@@ -502,7 +502,7 @@ void edit_product(Producto product){
 	}while(true);
 	cout<<"\033[0m";
 	if(opty == 1){
-		return;
+		return menu_principal(false);
 	}
 	last_slash = current_category.find_last_of('/');
 	string current_product = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario + ";\"" + product.descripcion +  "\";";
