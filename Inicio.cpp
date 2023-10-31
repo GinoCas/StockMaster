@@ -16,6 +16,7 @@ void inicio();
 
 int main(){
 	SetConsoleOutputCP(CP_UTF8);
+	system("chcp 65001");
 	inicio();
 }
 

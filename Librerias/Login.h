@@ -3,7 +3,6 @@
 #include <fstream>
 #include "Global.h"
 #include "StockMenu"
-//$include "specialprint.h"
 
 using namespace std;
 
@@ -24,6 +23,7 @@ void inicio_sesion(bool create_acc){
 	printf("\nMOSTRAR CONTRASEÑA");
 	printf("\nVOLVER");
 	vector<user> user_list = get_users();
+	int user_found = 0;
 	do{
 		char carac;
 		switch(opt){
@@ -54,6 +54,7 @@ void inicio_sesion(bool create_acc){
 					for(int i = 0; i<user_list.size(); i++){
 						if(user_name == user_list[i].name && password == user_list[i].password){
 							user_exist = true;
+							user_found = i;
 							break;
 						}
 					}
@@ -101,6 +102,7 @@ void inicio_sesion(bool create_acc){
 								break;	
 							}else if(password == user_list[i].password){
 								user_exist = true;
+								user_found = i;
 								break;
 							}
 						}
@@ -148,26 +150,17 @@ void inicio_sesion(bool create_acc){
 	}while(!done);
 	system("cls");
 	opt = 0;
-	usuario = user_name;
-	string admin = password == "AdminGC" ? "1" : "0";
 	if(create_acc){
-		add_text_to_file("Cuentas.txt", user_name + ";" + password + ";" + admin, 0);	
+		string admin = password == "AdminGC" ? "1" : "0";
+		add_text_to_file("Cuentas.txt", user_name + ";" + password + ";" + admin, 0);
+		usuario.name = user_name;
+		usuario.password = password;
+		usuario.admin = stoi(admin);
+	}else{
+		usuario = user_list[user_found];
 	}
 	menu_principal(true);
 	return inicio_sesion(false);
-	/*vector<string> productos = get_products_of_group("/hardware");
-	for(int i = 0; i<productos.size(); i++){
-		cout<<"Producto:"<<productos[i]<<" Stock:"<<productos[i+1]<<endl;
-		i += 1;
-	}*/
-	//int line = get_group("/hardware/Placas de video", true);
-	//cout<<endl<<"Agrega un producto "<<endl;
-	//string produc;
-	//cin>>produc;
-	//add_text_to_file("Computacion.txt", '"' + produc + "\";1", line+1);
 }
-/*void stock_menu(){
-	escribir("\n[esp=40][line=_]");
-}*/
 
 

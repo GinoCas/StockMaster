@@ -6,19 +6,6 @@
 
 using namespace std;
 
-int opt = 0;
-int opty = 0;
-char last_char;
-
-string usuario, after_text = "";
-
-void empty_section(int xstart, int ystart, int repeat, int spaces){
-	for(int i = 0; i<repeat; i++){
-		cursor(xstart, ystart + i); 
-		escribir("[esp=" + to_string(spaces) + "]");
-	}
-}
-
 struct Producto{
 	string nombre = "";
 	string categoria = "";
@@ -34,6 +21,20 @@ struct user{
 	bool admin = false;
 };
 
+int opt = 0;
+int opty = 0;
+char last_char;
+
+user usuario;
+string after_text = "";
+
+void empty_section(int xstart, int ystart, int repeat, int spaces){
+	for(int i = 0; i<repeat; i++){
+		cursor(xstart, ystart + i); 
+		escribir("[esp=" + to_string(spaces) + "]");
+	}
+}
+
 vector<user> get_users(){
 	FILE * archivo;
 	archivo = fopen("Cuentas.txt", "rt");
@@ -45,6 +46,7 @@ vector<user> get_users(){
 		char letra = fgetc(archivo);
 		if(letra == '\n'){
 			count = 0;
+			current_user.admin = stoi(text);
 			users.push_back(current_user);
 			text = "";
 			continue;
@@ -56,9 +58,6 @@ vector<user> get_users(){
 				break;
 				case 1:
 					current_user.password = text;
-				break;
-				case 2:
-					current_user.admin = text == "AdminGC";
 				break;
 			}
 			count++;
@@ -158,10 +157,21 @@ void change_option_y(int max_y){
 	}
 }
 
+int arrow_pressed(){
+	switch(last_char){
+		case 75:
+		return -1;	
+		case 77:
+		return 1;
+	}
+	return 0;
+}
+
 string input_text(string using_text, int char_limit, int opt_limit, char show, int x_end, int x_start, int y_start){
-	char carac; //caracter escrito y todo lo escrito
+	char carac; //caracter escrito
 	string text = using_text;
 	int carac_idx = using_text.length();
+	int move_idx = carac_idx;
 	bool flechas = false;
 	string last_word = "";
 	vector<string> word_list; //lista de palabras
@@ -233,8 +243,15 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 			continue;
 		}
 		last_char = carac;
-		change_option(opt_limit);
+		if(opt_limit != 0){
+			change_option(opt_limit);	
+		}else if(carac == -32){
+			last_char = getch();
+		}
 		if(carac == -32 && (last_char == 72 || last_char == 80)){
+			if(opt_limit == 0){
+				continue;
+			}
 			break;
 		}
 		if(carac < 32 || carac == 127){
@@ -252,9 +269,9 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 		before = ceil(carac_idx / x_end);
 		carac_idx++;
 		if(show == '\0'){
-			cout<<carac;
+			cout<<carac;	
 		}else{
-			cout<<show;
+			cout<<show;	
 		}
 		cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
 		if(carac_idx % x_end == 0){
