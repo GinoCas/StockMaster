@@ -9,7 +9,7 @@ int get_category(string category, int stop){
 	int current_line = 0;
 	bool found_category = false;
 	char letra;
-	
+	bool end_cat = false;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
 		if(letra == '\n' || letra == '\r' || letra == '\t'){
@@ -21,6 +21,7 @@ int get_category(string category, int stop){
 		int ult_barra = current_category.rfind('/');
 		switch(letra){
 			case '{':
+				end_cat = false;
 				current_category = current_category + "/" + texto;
 				found_category = current_category == category && !found_category ? true : found_category;
 				if(found_category){
@@ -31,12 +32,15 @@ int get_category(string category, int stop){
 				texto = "";
 			continue;
 			case '}':
-				if(stop == 2 && found_category){
-					return current_line;
-				}
 				if(ult_barra != string::npos){
 					found_category = current_category == category && found_category ? false : found_category;
 					current_category.erase(ult_barra);
+					if(end_cat){
+						return current_line;
+					}
+					if(current_category == category && found_category){
+						end_cat = true;
+					}
 				}
 			continue;
 			case '"':
@@ -219,7 +223,11 @@ void delet_line_from_file(int deletLine){
     return;
 }
 void delet_category(string category){
-	get_category(category, false);
+	int begin = get_category(category, 1);
+	int end = get_category(category, 2);
+	for(int i = 0; i<(end-begin)+1; i++){
+		delet_line_from_file(begin+1);
+	}
 }
 void replace_text_at_line(string text, int replaceLine){
 	fstream file("Computacion.txt");
@@ -276,17 +284,19 @@ string cut_text(string text, int limit)
 	}
 	return resultado;
 }
-string select_category(){
+string select_category(string category, int ylimit){
 	vector<string> category_list = get_category_list("", true);
-	string current_category = "";
 	for(int i = 0; i<category_list.size(); i++){
-		if(category_list[i] == current_category){
+		if(category_list[i] == category){
 			opty = i;
 			break;
 		}
 	}
 	last_char = getch();
-	change_option_y(category_list.size()-1);
-	current_category = category_list[opty];
-	return current_category;
+	if(ylimit != -1){
+		change_option_two_dim(category_list.size()-1, ylimit);
+	}else{
+		change_option_y(category_list.size()-1);	
+	}
+	return category_list[opty];
 }

@@ -220,7 +220,7 @@ void update_menu(int upd){
 				printf("    ");
 				continue;
 			}
-			change_option_two_dim(4, menu.categoryLimit);	
+			change_option_two_dim(4, 10);	
 		}
 		done = last_char == '\r';
 		if(!done){
@@ -228,7 +228,7 @@ void update_menu(int upd){
 				opt = 0;
 			}
 			if(lasty > 2){
-				printf(" -");	
+				printf(" -");
 			}else{
 				printf("   ");	
 			}
@@ -236,11 +236,6 @@ void update_menu(int upd){
 		}
 		cursor(0, 20);
 		escribir("[esp=50]");
-		if(opty == 1 && menu.current_category.empty()){
-			cursor(0, 20);
-			printf("\033[1;31mSeleccione una categoría primero.\033[0m");
-			done = false;
-		}
 		if(opty == 0){
 			empty_section(0,5, 24, 59);
 			done = true;
@@ -271,6 +266,9 @@ void update_menu(int upd){
 				opt = menu.categoryLimit-1;
 			}
 		}
+		if(opt > menu.categoryLimit){
+			opt = menu.categoryLimit;
+		}
 		lastx = opt;
 		cursor(0, 9+opt);
 		printf(" >");
@@ -289,19 +287,31 @@ void update_menu(int upd){
 	if(opt == menu.categoryLimit){
 		int ult_barra = menu.current_category.rfind('/');
 		int ant_barra = menu.current_category.rfind('/', ult_barra-1);
-		if(ult_barra != string::npos){     
-			update = menu.current_category.substr(ant_barra, ult_barra);
-			mayus = mayus_transform(menu.current_category.substr(ant_barra+1, ult_barra-1));	
+		if(ult_barra != string::npos){
+			update = menu.current_category;
+			update = update.erase(ult_barra); //menu.current_category.substr(ant_barra, ult_barra);
+			if(update.length() != 0){
+				mayus = mayus_transform(update.substr(ant_barra + 1));	
+			}	
 		}
+		opt = 30;	
 	}else{
 		if(usuario.admin && opt > menu.categoryLimit-4){
 			int last_slash;
 			vector<string> category_list = get_category_list("", true);
-			string current_category = category_list[0];
+			string current_category = menu.current_category.empty() ? category_list[0] : menu.current_category;
 			if(opt == menu.categoryLimit-3){
 				cursor(0,20);
 				cout<<"Nombre de la categoría:";
 				current_category = input_text("", 20, 0, '\0', 44, 24, 20);
+				ifstream file("Computacion.txt");
+				int line_count = 0;
+				string line = "";
+				while (getline(file, line)) {
+			        line_count++;
+			    }
+			    file.close();
+				add_text_to_file("Computacion.txt", current_category + "{\n\n}", line_count);
 			}
 			if(opt == menu.categoryLimit-2){
 				do{
@@ -310,7 +320,7 @@ void update_menu(int upd){
 					cursor(0,20);
 					last_slash = current_category.find_last_of('/');
 					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
-					current_category = select_category();
+					current_category = select_category(current_category, -1);
 					if(last_char == '\r'){
 						break;
 					}
@@ -332,7 +342,7 @@ void update_menu(int upd){
 					cursor(0,20);
 					last_slash = current_category.find_last_of('/');
 					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
-					current_category = select_category();
+					current_category = select_category(current_category, -1);
 					if(last_char == '\r'){
 						break;
 					}
@@ -358,14 +368,15 @@ void update_menu(int upd){
 				if(opty == 1){
 					return update_menu(1);
 				}
-				int line = get_category(current_category, true);
-				delet_line_from_file(line+1);
+				delet_category(current_category);
+				return menu_principal(true);
 			}
 			return update_menu(1);
 		}
 		int id = opt + (5 * (menu.categoryPage-1));
 		mayus = mayus_transform(categorias[id]);		
 		update = menu.current_category + "/" + categorias[id];
+		opt = 1;
 	}
 	cursor(21-mayus.length()/2,2);
 	if(update.length() != 0){
@@ -374,11 +385,11 @@ void update_menu(int upd){
 		if(menu.current_category == ""){
 			return update_menu(0);
 		}
+		cout<<"BRUH";
 		cursor(13,2);
 		printf("\033[2K\033[1;34mSTOCKMANAGER - MENÚ PRINCIPAL\033[0m", mayus.c_str());
 	}
 	menu.current_category = update;
-	opty = 0;
 	update_menu(true);
 }
 
@@ -560,15 +571,7 @@ void edit_product(Producto product){
 				cursor(13,7);
 				last_slash = current_category.find_last_of('/');
 				cout<<current_category.substr(last_slash+1);
-				for(int i = 0; i<categories.size(); i++){
-					if(categories[i] == current_category){
-						opty = i;
-						break;
-					}
-				}
-				last_char = getch();
-				change_option_two_dim(categories.size()-1,4);
-				current_category = categories[opty];
+				current_category = select_category(current_category, 4);
 				opty = 0;
 			break;
 			case 3:
@@ -606,7 +609,7 @@ void edit_product(Producto product){
 void add_product(){
 	int line;
 	vector<string> categories = get_category_list("", true);
-	string current_category = menu.current_category;
+	string current_category = menu.current_category.empty() ? categories[0] : menu.current_category;
 	int last_slash = current_category.find_last_of('/');
 	empty_section(0, 4, 25, 59);
 	cursor(0,2);
@@ -639,15 +642,7 @@ void add_product(){
 				cursor(13,7);
 				last_slash = current_category.find_last_of('/');
 				cout<<current_category.substr(last_slash+1);
-				for(int i = 0; i<categories.size(); i++){
-					if(categories[i] == current_category){
-						opty = i;
-						break;
-					}
-				}
-				last_char = getch();
-				change_option_two_dim(categories.size()-1,4);
-				current_category = categories[opty];
+				current_category = select_category(current_category, 4);
 				opty = 0;
 			break;
 			case 3:
