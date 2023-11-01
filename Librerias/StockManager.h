@@ -6,7 +6,7 @@ int get_category(string category, int stop){
 	archivo = fopen("Computacion.txt", "rt");
 	
 	string current_category = "", texto = "";
-	int current_line = 0;
+	int current_line = 0, return_line = 0;
 	bool found_category = false;
 	char letra;
 	bool end_cat = false;
@@ -17,6 +17,9 @@ int get_category(string category, int stop){
 				current_line++;
 			}
 			continue;
+		}
+		if(letra != ' ' && letra > 31){
+			return_line = current_line;
 		}
 		int ult_barra = current_category.rfind('/');
 		switch(letra){
@@ -52,7 +55,7 @@ int get_category(string category, int stop){
 		}
 		texto += letra;
 	}
-	return current_line;
+	return return_line;
 }
 vector<string> get_category_list(string category, bool all){
 	FILE * archivo;
@@ -299,4 +302,22 @@ string select_category(string category, int ylimit){
 		change_option_y(category_list.size()-1);	
 	}
 	return category_list[opty];
+}
+
+int get_last_line_of_file(){
+	FILE * archivo;
+	archivo = fopen("Computacion.txt", "rt");
+	int current_line = 0, last_line = 0;
+	char carac;
+	while(!feof(archivo)){
+		carac = fgetc(archivo);
+		if(carac == '\n' || carac == '\r' || carac == '\t'){
+			if(carac == '\n'){
+				current_line++;
+			}
+			continue;
+		}
+		last_line = current_line;
+	}
+	return last_line;
 }

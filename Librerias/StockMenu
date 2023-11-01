@@ -262,9 +262,6 @@ void update_menu(int upd){
 		if(opty+1 != menu.categoryPage){
 			menu.categoryPage = opty+1;
 			update_category(categorias);
-			if(opt > menu.categoryLimit){
-				opt = menu.categoryLimit-1;
-			}
 		}
 		if(opt > menu.categoryLimit){
 			opt = menu.categoryLimit;
@@ -274,7 +271,7 @@ void update_menu(int upd){
 		printf(" >");
 		cursor(0, 9+opt);
 		last_char = getch();
-		change_option_two_dim(ceil((menu.categoryLimit-usuario.admin*3) / 5), menu.categoryLimit);
+		change_option_two_dim(ceil((categorias.size()-1) / 5), menu.categoryLimit);
 		printf(" -");
 		done = last_char == '\r';
 		if((lastx == 0 && last_char == 72) || lastx == menu.categoryLimit && last_char == 80){
@@ -304,14 +301,7 @@ void update_menu(int upd){
 				cursor(0,20);
 				cout<<"Nombre de la categoría:";
 				current_category = input_text("", 20, 0, '\0', 44, 24, 20);
-				ifstream file("Computacion.txt");
-				int line_count = 0;
-				string line = "";
-				while (getline(file, line)) {
-			        line_count++;
-			    }
-			    file.close();
-				add_text_to_file("Computacion.txt", current_category + "{\n\n}", line_count);
+				add_text_to_file("Computacion.txt", current_category + "{\n\n}", get_category(menu.current_category, 1) + 1);
 			}
 			if(opt == menu.categoryLimit-2){
 				do{
@@ -319,7 +309,7 @@ void update_menu(int upd){
 					escribir("[esp=59]");
 					cursor(0,20);
 					last_slash = current_category.find_last_of('/');
-					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
+					cout<<"Seleccione una categoría: ← "<<current_category.substr(last_slash + 1)<<" →";
 					current_category = select_category(current_category, -1);
 					if(last_char == '\r'){
 						break;
@@ -371,6 +361,7 @@ void update_menu(int upd){
 				delet_category(current_category);
 				return menu_principal(true);
 			}
+			opty = 0;
 			return update_menu(1);
 		}
 		int id = opt + (5 * (menu.categoryPage-1));
@@ -570,8 +561,11 @@ void edit_product(Producto product){
 				escribir("[esp=40]");
 				cursor(13,7);
 				last_slash = current_category.find_last_of('/');
-				cout<<current_category.substr(last_slash+1);
+				cout<<current_category.substr(last_slash+1)<<" ← →";
 				current_category = select_category(current_category, 4);
+				last_slash = current_category.find_last_of('/');
+				cursor(13+current_category.substr(last_slash+1).length(),7);
+				cout<<"    ";
 				opty = 0;
 			break;
 			case 3:
@@ -641,8 +635,11 @@ void add_product(){
 				escribir("[esp=40]");
 				cursor(13,7);
 				last_slash = current_category.find_last_of('/');
-				cout<<current_category.substr(last_slash+1);
+				cout<<current_category.substr(last_slash+1)<<" ← →";
 				current_category = select_category(current_category, 4);
+				last_slash = current_category.find_last_of('/');
+				cursor(13+current_category.substr(last_slash+1).length(),7);
+				cout<<"    ";
 				opty = 0;
 			break;
 			case 3:
