@@ -13,7 +13,7 @@ struct StockMenu{
 };
 
 StockMenu menu;
-void update_menu(int), product_info(Producto, int), add_product(), my_products(vector<Producto>), edit_product(Producto);
+void update_menu(int), product_info(Producto, int), add_product(), my_products(vector<Producto>), edit_product(Producto), historial();
 
 void menu_principal(bool from_login){
 	system("cls");
@@ -455,9 +455,9 @@ void product_info(Producto product, int upd){
 				escribir("[esp=50]");
 				cursor(77, 11 + line);
 				cout<<"¿Estás seguro?   Sí   No";
-				cursor(91 + 5*opty, 11 + line);
+				cursor(92 + 5*opty, 11 + line);
 				cout<<">";
-				cursor(90 + 5*opty, 11 + line);
+				cursor(91 + 5*opty, 11 + line);
 				last_char = getch();
 				change_option_y(1);
 				if(last_char == '\r'){ break; }
@@ -465,6 +465,7 @@ void product_info(Producto product, int upd){
 			if(opty == 1){
 				return product_info(product, false);
 			}
+			add_text_to_file("Historial.txt", product.persona + ";" + "Se quitó el producto " + product.nombre + ".", 1);
 			delet_line_from_file(find_product_in_category(product));
 		return menu_principal(false);
 		case 2:
@@ -478,6 +479,7 @@ void product_info(Producto product, int upd){
 		return my_products(c_products); //update_menu(1);
 	}
 }
+
 void my_products(vector<Producto> products){
 	cursor(0,2);
 	escribir("[esp=59]");
@@ -489,36 +491,74 @@ void my_products(vector<Producto> products){
 		if(products[i].persona != usuario.name){
 			continue;
 		}
-		cursor(0, 5+count);
+		cursor(0, 4+count);
 		count++;
 		string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
 		cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";
 		c_products.push_back(products[i]);
 	}
-	cursor(0, 5+count);
-	escribir("[esp=24]Volver");
+	cursor(0, 4+count);
+	escribir("[esp=13]- Movimientos   - Volver");
 	bool done = false;
 	opt = 0;
+	opty = 0;
 	do{
 		if(opt != count){
-			cursor(2, 5+opt);
+			cursor(2, 4+opt);
 			cout<<">";	
-			cursor(1, 5+opt);
+			cursor(1, 4+opt);
 		}else{
-			cursor(23, 5+count);
+			cursor(14 + 16 * opty, 4+count);
 			cout<<">";
-			cursor(22, 5+count);
+			cursor(13 + 16 * opty, 4+count);
 		}
 		last_char = getch();
-		change_option(count);
+		if(opt == count){
+			change_option_two_dim(1,count);
+		}else{
+			change_option(count);	
+		}
 		cout<<" -";
 		done = last_char == '\r';
 	}while(!done);
 	if(opt == count){
-		return menu_principal(false);
+		if(opty == 1){
+			return menu_principal(false);	
+		}
+		if(opty == 0){
+			historial();
+			empty_section(0, 4, 25, 59);
+			return my_products(products);
+		}
 	}
 	return product_info(c_products[opt], true);
 }
+
+void historial(){
+	cursor(0,2);
+	escribir("[esp=59]");
+	cursor(22,2);
+	cout<<"MOVIMIENTOS";
+	int page = 1, lasty = 0;
+	opty = 0;
+	do{
+		empty_section(0, 4, 25, 59);
+		cursor(0,4);
+		page = ceil(show_history(opty+1) / 20.0);
+		if(page > 1){
+			cout<<" ← "<<opty+1<<"/"<<page<<" →"<<endl;
+		}
+		cout<<"\n > Volver";
+		cursor(0,-1);
+		lasty = opty;
+		last_char = getch();
+		change_option_y(page-1);
+		if(last_char == '\r'){
+			break;
+		}	
+	}while(true);
+}
+
 void edit_product(Producto product){
 	int line = find_product_in_category(product);
 	vector<string> categories = get_category_list("", true);
@@ -539,10 +579,10 @@ void edit_product(Producto product){
 	cursor(0,5);
 	cout<<"\033[1;37m Nombre: \033[1;33m"<<product.nombre<<"\n \033[1;37mStock: \033[1;33m"<<product.stock<<"\033[1;37m\n Categoría: \033[1;33m"<<product.categoria<<"\033[1;37m\n Descripción:\033[1;33m";
 	show_text_in_margin(product.descripcion, 15, 44, 8);
-	after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario.name + "\033[1;37m\n                    Aceptar    Cancelar\033[1;33m";
+	after_text = "\033[1;37m\n Cargado por: \033[1;33m" + product.persona + "\033[1;37m\n                    Aceptar    Cancelar\033[1;33m";
 	cout<<after_text;
 	opt = 0, opty = 0;
-	int line_desc = 8;
+	int line_desc = 8, last_stock = product.stock;
 	do{
 		switch(opt){
 			case 0:
@@ -585,12 +625,17 @@ void edit_product(Producto product){
 			break;
 		}
 	}while(true);
+	if(last_stock != product.stock){
+		add_text_to_file("Historial.txt", product.persona + ";" + "Se actualizo el stock de " + product.nombre + ": " + to_string(product.stock) + " unidades.", 1);
+	}else{
+		add_text_to_file("Historial.txt", product.persona + ";" + "Se modificó el producto " + product.nombre + ".", 1);
+	}
 	cout<<"\033[0m";
 	if(opty == 1){
 		return menu_principal(false);
 	}
 	last_slash = current_category.find_last_of('/');
-	string current_product = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario.name + ";\"" + product.descripcion +  "\";";
+	string current_product = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + product.persona + ";\"" + product.descripcion +  "\";";
 	if(current_category.substr(last_slash+1) != product.categoria){
 		delet_line_from_file(line);
 		line = get_category(current_category, true) + 1;
@@ -665,5 +710,6 @@ void add_product(){
 		return;
 	}
 	line = get_category(current_category, true);
+	add_text_to_file("Historial.txt", usuario.name + ";" + "Se agregó el producto " + product.nombre + ".", 1);
 	add_text_to_file("Computacion.txt", '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario.name + ";\"" + product.descripcion +  "\";", line+1);
 }

@@ -26,13 +26,45 @@ int opty = 0;
 char last_char;
 
 user usuario;
-string after_text = "";
+string after_text = "", cut_text(string, int);
 
 void empty_section(int xstart, int ystart, int repeat, int spaces){
 	for(int i = 0; i<repeat; i++){
 		cursor(xstart, ystart + i); 
 		escribir("[esp=" + to_string(spaces) + "]");
 	}
+}
+
+int show_history(int page){
+	FILE * archivo;
+	archivo = fopen("Historial.txt", "rt");
+	string text = "";
+	bool skip_line = false;
+	int count = 0, count_point;
+	while(!feof(archivo)){
+		char letra = fgetc(archivo);
+		if(letra == '\n'){
+			if(!skip_line && count_point > 0){
+				if(count >= (20*(page-1)) && count < 20*page){
+					cout<<" "<<cut_text(text, 54)<<endl;
+				}
+				count++;
+			}
+			text = "";
+			count_point = 0;
+			skip_line = false;
+			continue;
+		}
+		if(skip_line){continue;}
+		if(letra == ';'){
+			count_point++;
+			skip_line = text != usuario.name;
+			text = "";
+			continue;
+		}
+		text += letra;
+	}
+	return count;
 }
 
 vector<user> get_users(){
@@ -367,4 +399,32 @@ void show_text_in_margin(string text, int x_start, int x_end, int y_start){
 		}
 	
 	}
+}
+string cut_text(string text, int limit)
+{
+	if(text.length() < 13){
+		return text;
+	}
+	string resultado = "";
+	int word_length = 0;
+	for(int i = 0; i<text.length(); i++){
+		if(text[i] == ' '){
+			word_length = 0;
+			if(i > 0 && text[i-1] == ' '){
+				continue;
+			}
+		}
+		if(resultado.length() >= limit){
+			if(word_length <= 1){
+				resultado = resultado.substr(0, resultado.length() - word_length - 2);
+			}
+			if(text.length() - resultado.length() > 3){
+				resultado += "...";
+			}
+			break;
+		}
+		word_length++;
+		resultado += text[i];
+	}
+	return resultado;
 }

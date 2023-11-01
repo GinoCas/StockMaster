@@ -259,34 +259,7 @@ void replace_text_at_line(string text, int replaceLine){
     file<<archivText;
     return;
 }
-string cut_text(string text, int limit)
-{
-	if(text.length() < 13){
-		return text;
-	}
-	string resultado = "";
-	int word_length = 0;
-	for(int i = 0; i<text.length(); i++){
-		if(text[i] == ' '){
-			word_length = 0;
-			if(i > 0 && text[i-1] == ' '){
-				continue;
-			}
-		}
-		if(resultado.length() >= limit){
-			if(word_length <= 1){
-				resultado = resultado.substr(0, resultado.length() - word_length - 2);
-			}
-			if(text.length() - resultado.length() > 3){
-				resultado += "...";
-			}
-			break;
-		}
-		word_length++;
-		resultado += text[i];
-	}
-	return resultado;
-}
+
 string select_category(string category, int ylimit){
 	vector<string> category_list = get_category_list("", true);
 	for(int i = 0; i<category_list.size(); i++){
@@ -302,22 +275,4 @@ string select_category(string category, int ylimit){
 		change_option_y(category_list.size()-1);	
 	}
 	return category_list[opty];
-}
-
-int get_last_line_of_file(){
-	FILE * archivo;
-	archivo = fopen("Computacion.txt", "rt");
-	int current_line = 0, last_line = 0;
-	char carac;
-	while(!feof(archivo)){
-		carac = fgetc(archivo);
-		if(carac == '\n' || carac == '\r' || carac == '\t'){
-			if(carac == '\n'){
-				current_line++;
-			}
-			continue;
-		}
-		last_line = current_line;
-	}
-	return last_line;
 }
