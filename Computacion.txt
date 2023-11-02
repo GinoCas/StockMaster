@@ -1,8 +1,9 @@
 hardware{
+asdfasdf;0;gino;;
+sdafasdf;0;gino;;
+asdfasdfasdf;0;gino;;
+asdasd;1;gino;;
 Placas de video{
-test;0;stefa;asdsdfa;
-test;5;gino;asdasd;
-gtx;1;XDE;descripcion;
 		amd;5;Jasjdjas;descripcion;
 		amd;5;Jasjdjas;descripcion;
 		xd;5;Jasjdjas;descripcion;
@@ -224,3 +225,7 @@ software{
            
                         
  
+                     
+              
+                      
+                   

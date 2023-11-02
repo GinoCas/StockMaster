@@ -70,17 +70,19 @@ vector<Producto> update_products(vector<Producto> productos){
 	for(int i = 0; i<menu.productLimit; i++){
 		int xcursor = i % 2 == 0 ? 62 : 92;
 		int id = i + (8 * (menu.productPage-1));
-		cursor(xcursor, 5 + ceil(i / 2) * 5);
+		cursor(xcursor, 6 + ceil(i / 2) * 5);
 		string stock_text = productos[id].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
 		stock_text = productos[i].stock < 5 && productos[i].stock != 0 ? "\033[1;33mPoco Stock" : stock_text;
 		cout<<"- "<<cut_text(productos[id].nombre, 12)<<" * " + stock_text + "\033[0m";
-		cursor(xcursor, 6 + ceil(i / 2) * 5);
+		cursor(xcursor, 7 + ceil(i / 2) * 5);
 		cout<<"  Usuario:"<<productos[id].persona;
 		if(i % 2 == 1 && i+1 != menu.productLimit){
-			cursor(62, 8 + ceil(i / 2) * 5);
+			cursor(62, 9 + ceil(i / 2) * 5);
 			escribir("[esp=58][line=-]");
 		}
 	}
+	cursor(62, 4);
+	escribir("Buscador:");
 	cursor(85, 25);
 	cout<<"       ";
 	if(productos.size() > 8){
@@ -176,50 +178,63 @@ void update_menu(int upd){
 					opty = 0;
 					continue;
 				}
-				cursor(62, 5 + opt * 5);
-				printf(">");
-				cursor(61, 5 + opt * 5);
+				if(opt != 0){
+					cursor(62, 6 + (opt-1) * 5);
+					printf(">");
+					cursor(61, 6 + (opt-1) * 5);
+					break;
+				}
+				input_text("", 48, 1, '\0', 50, 72, 4);
+				if(opt != 0){
+					continue;
+				}
 			break;
 			case 4:
+				if(opt == 0){
+					opty = 3;
+					continue;
+				}
 				if(menu.productLimit == 0){
 					opty = 2;
 					continue;
 				}
-				if(menu.productLimit - 2 * opt == 1){
+				if(menu.productLimit - 2 * (opt-1) == 1){
 					opty = lasty == 3 ? 0 : opty-1;
 					opt = lasty == 3 ? 0 : opt;
 					continue;
 				}
-				cursor(92, 5 + opt * 5);
+				cursor(92, 6 + (opt-1) * 5);
 				printf(">");
-				cursor(91, 5 + opt * 5);
+				cursor(91, 6 + (opt-1) * 5);
 			break;
 		}
 		lasty = opty;
-		if((opt == 0 && opty < 3) || opty > 2){
+		if((opt == 0 && opty < 3) || (opty > 2 && opt != 0)){
 			last_char = getch();
 		}
 		if(opty > 2){
-			change_option_two_dim(5, ceil((menu.productLimit-1)/2));
+			change_option_two_dim(5, ceil((menu.productLimit-1)/2) + 1);
 			if(opty == 5){
 				if(menu.productPage == ceil(productos.size() / 8.0)){
 					opty = 0;
-					opt = 0;
+					opt = 1;
 					printf(" -");
 					continue;
 				}
 				menu.productPage++;
 				opty = 3;
 				productos = update_products(productos);
-				opt = (opt+1) > ceil(menu.productLimit / 2.0) ? ceil(menu.productLimit / 2.0)-1 : opt;
-				cursor(61, 5 + opt * 5);
+				opt = opt > ceil(menu.productLimit / 2.0) ? ceil(menu.productLimit / 2.0) : opt;
+				cursor(61, 5 + (opt-1) * 5);
+				continue;
 			}
 			if(opty == 2){
 				if(menu.productPage != 1){
 					menu.productPage--;
 					opty = 4;
 					productos = update_products(productos);
-					cursor(61, 5 + opt * 5);
+					cursor(61, 5 + (opt-1) * 5);
+					continue;
 				}
 			}
 		}else{
@@ -232,7 +247,7 @@ void update_menu(int upd){
 				printf("    ");
 				continue;
 			}
-			change_option_two_dim(4, 10);	
+			change_option_two_dim(3, 10);	
 		}
 		done = last_char == '\r';
 		if(!done){
@@ -264,7 +279,7 @@ void update_menu(int upd){
 		return;
 	}
 	if(opty > 2){
-		int id = (menu.productPage - 1) * 8 + (opty-3) + 2 * opt;
+		int id = (menu.productPage - 1) * 8 + (opty-3) + 2 * (opt-1);
 		return product_info(productos[id], 2);
 	}
 	done = false;
