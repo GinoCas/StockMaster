@@ -1,4 +1,9 @@
 usuario;accion;
+stefa;Se actualizo el stock de test: 0 unidades. 02/11/23 08:36 AM
+stefa;Se actualizo el stock de test: 1 unidades. 02/11/23 08:36 AM
+stefa;Se actualizo el stock de test: 16 unidades. 02/11/23 08:36 AM
+stefa;Se agregó el producto test. 02/11/23 08:36 AM
+XDE;Se modificó el producto gtx. 02/11/23 08:35 AM
 gino;Se actualizo el stock de test: 5 unidades. 02/11/23 08:34 AM
 gino;Se actualizo el stock de test: 4 unidades. 02/11/23 08:32 AM
 gino;Se modificó el producto test. 02/11/23 08:32 AM
