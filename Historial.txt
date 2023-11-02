@@ -1,4 +1,14 @@
 usuario;accion;
+gino;Se quitó el producto asdasdasd. 02/11/23 08:29 AM
+gino;Se quitó el producto xd. 02/11/23 08:29 AM
+gino;Se quitó el producto xdxd. 02/11/23 08:29 AM
+gino;Se quitó el producto asdasd. 02/11/23 08:29 AM
+gino;Se actualizo el stock de asdasd: 55 unidades. 02/11/23 08:29 AM
+gino;Se agregó el producto asdasdasd. 02/11/23 08:28 AM
+Jasjdjas;Se modificó el producto xd. 02/11/23 08:14 AM
+gino;Se agregó el producto xdxd. 02/11/23 08:13 AM
+gino;Se agregó el producto asdasd. 02/11/23 08:13 AM
+gino;Se agregó el producto xd. 02/11/23 08:10 AM
 XDE;Se actualizo el stock de gtx: 1 unidades. 02/11/23 07:43 AM
 XDE;Se actualizo el stock de gtx: 9 unidades. 02/11/23 07:43 AM
 XDE;Se actualizo el stock de gtx: 5 unidades. 02/11/23 07:38 AM

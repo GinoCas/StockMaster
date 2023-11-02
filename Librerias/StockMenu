@@ -53,7 +53,15 @@ void menu_principal(bool from_login){
 	}
 	return update_menu(true);
 }
-void update_products(vector<Producto> productos){
+vector<Producto> update_products(vector<Producto> productos){
+	sort(productos.begin(), productos.end(), [](const Producto& a, const Producto& b) {
+        if (a.stock > 0 && b.stock <= 0) {
+            return true;
+        } else if (a.stock <= 0 && b.stock > 0) {
+            return false;
+        }
+        return a.stock < b.stock;
+    });
 	empty_section(62, 5, 24, 60);
 	menu.productLimit = min(8, static_cast<int>(productos.size()) - (menu.productPage - 1) * 8);
 	if(menu.productLimit < 1){
@@ -88,7 +96,7 @@ void update_products(vector<Producto> productos){
 			cout<<"  ";
 		}
 	}
-	return;
+	return productos;
 }
 void update_category(vector<string> categories){
 	empty_section(0, 9, 15, 59);
@@ -142,7 +150,7 @@ void update_menu(int upd){
 		write_menu();	
 	}
 	if(upd != 0){
-		update_products(productos); //Show products
+		productos = update_products(productos); //Show products
 	}
 	int lasty = opty;
 	do{
@@ -201,7 +209,7 @@ void update_menu(int upd){
 				}
 				menu.productPage++;
 				opty = 3;
-				update_products(productos);
+				productos = update_products(productos);
 				opt = (opt+1) > ceil(menu.productLimit / 2.0) ? ceil(menu.productLimit / 2.0)-1 : opt;
 				cursor(61, 5 + opt * 5);
 			}
@@ -209,7 +217,7 @@ void update_menu(int upd){
 				if(menu.productPage != 1){
 					menu.productPage--;
 					opty = 4;
-					update_products(productos);
+					productos = update_products(productos);
 					cursor(61, 5 + opt * 5);
 				}
 			}
@@ -256,7 +264,7 @@ void update_menu(int upd){
 	}
 	if(opty > 2){
 		int id = (menu.productPage - 1) * 8 + (opty-3) + 2 * opt;
-		return product_info(productos[id], 2); //update_menu(1);
+		return product_info(productos[id], 2);
 	}
 	done = false;
 	int lastx = opt;
@@ -389,7 +397,7 @@ void update_menu(int upd){
 
 void product_info(Producto product, int upd){
 	const int line = ceil(product.descripcion.length() / 44);
-	if(upd != 0){
+	if(upd != 0 && upd != 3){
 		cursor(85, 25);
 		cout<<"       ";
 		cout<<"\033[K";
@@ -466,14 +474,15 @@ void product_info(Producto product, int upd){
 				if(last_char == '\r'){ break; }
 			}while(true);
 			if(opty == 1){
-				return product_info(product, false);
+				opty = lasty;
+				return product_info(product, 3);
 			}
 			add_text_to_file("Historial.txt", product.persona + ";" + "Se quitó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
 			delet_line_from_file(find_product(product));
 		return menu_principal(false);
 		case 2:
 			opty = lasty;
-			if(upd == 2){
+			if(upd == 2 || upd == 3){
 				cursor(62,2);
 				cout<<"\033[K";
 				return update_menu(1);
