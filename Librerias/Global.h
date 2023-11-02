@@ -204,7 +204,6 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	char carac; //caracter escrito
 	string text = using_text;
 	int carac_idx = using_text.length();
-	int move_idx = carac_idx;
 	bool flechas = false;
 	string last_word = "";
 	vector<string> word_list; //lista de palabras
@@ -334,12 +333,17 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 		}
 		text += carac;
 	}
+	last_char = carac;
 	string result;
 	for(int i = 0; i<carac_idx; i++){
 		result += text[i];
 	}
-	last_char = carac;
-	return result;
+	for(int i = result.length() - 1; i >= 0; i--){
+		if(result[i] != ' '){
+			return result.substr(0, i+1);
+		}
+	}
+	return "";
 }
 int input_number(int num, int num_max, int opt_limit){
 	char carac = getch();

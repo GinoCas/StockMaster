@@ -1,4 +1,6 @@
 usuario;accion;
+gino;Se quitó el producto x. 02/11/23 07:19 AM
+gino;Se agregó el producto x. 02/11/23 07:19 AM
 stefa;Se quitó el producto dfgsdfg. 02/11/23 05:28 AM
 stefa;Se actualizo el stock de dfgsdfg: 999999 unidades. 02/11/23 05:27 AM
 stefa;Se actualizo el stock de dfgsdfg: 15 unidades. 02/11/23 05:27 AM
