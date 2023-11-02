@@ -1,7 +1,7 @@
 hardware{
 Placas de video{
-		gtx;5;XDE;descripcion;
-amd;5;Jasjdjas;descripcion;
+gtx;1;XDE;descripcion;
+		amd;5;Jasjdjas;descripcion;
 		amd;5;Jasjdjas;descripcion;
 		xd;5;Jasjdjas;descripcion;
 		no se;5;Jasjdjas;descripcion;
@@ -214,3 +214,6 @@ software{
                    
                              
           
+ 
+ 
+  

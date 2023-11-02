@@ -690,6 +690,9 @@ void edit_product(Producto product){
 			}
 			break;
 		}
+		if(last_char == '\r'){
+			opt++;
+		}
 	}while(true);
 	if(last_stock != product.stock){
 		add_text_to_file("Historial.txt", product.persona + ";" + "Se actualizo el stock de " + product.nombre + ": " + to_string(product.stock) + " unidades. " + get_day() + ' ' + get_hour(), 1);
@@ -700,6 +703,7 @@ void edit_product(Producto product){
 	if(opty == 1){
 		return menu_principal(false);
 	}
+	cout<<line;
 	last_slash = current_category.find_last_of('/');
 	string current_product =  product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	if(current_category.substr(last_slash+1) != product.categoria){
@@ -757,6 +761,7 @@ void add_product(){
 			case 3:
 				after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario.name + "\033[1;37m\n                    Aceptar    Cancelar\033[1;33m";
 				product.descripcion = input_text(product.descripcion, 790, 4, '\0', 44, 15, 8);
+				last_char = ' ';
 			break;
 			case 4:
 				line_desc = 10 + ceil(product.descripcion.length() / 44);
@@ -784,6 +789,9 @@ void add_product(){
 				}
 			}
 			break;
+		}
+		if(last_char == '\r'){
+			opt++;
 		}
 	}while(true);
 	cout<<"\033[0m";

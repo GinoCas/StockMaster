@@ -1,4 +1,26 @@
 usuario;accion;
+XDE;Se actualizo el stock de gtx: 1 unidades. 02/11/23 07:43 AM
+XDE;Se actualizo el stock de gtx: 9 unidades. 02/11/23 07:43 AM
+XDE;Se actualizo el stock de gtx: 5 unidades. 02/11/23 07:38 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:36 AM
+XDE;Se actualizo el stock de gtx: 5 unidades. 02/11/23 07:36 AM
+XDE;Se actualizo el stock de gtx: 0 unidades. 02/11/23 07:36 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:36 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:36 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:30 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:30 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:29 AM
+XDE;Se actualizo el stock de gtx: 500000 unidades. 02/11/23 07:27 AM
+XDE;Se actualizo el stock de gtx: 1 unidades. 02/11/23 07:27 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:27 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
+XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:21 AM
 gino;Se quitó el producto x. 02/11/23 07:19 AM
 gino;Se agregó el producto x. 02/11/23 07:19 AM
 stefa;Se quitó el producto dfgsdfg. 02/11/23 05:28 AM

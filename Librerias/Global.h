@@ -356,7 +356,7 @@ int input_number(int num, int num_max, int opt_limit){
     last_char = carac;
     change_option(opt_limit);
 	num = num > num_max ? num_max : num; 
-    if(carac == -32){
+    if(!isdigit(carac)){
 		return num;
 	}
     int carac_num = atoi(&carac);

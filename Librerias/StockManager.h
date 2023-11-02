@@ -165,6 +165,12 @@ int find_product(Producto product){
 	string line = "";
 	string searching_for = product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	while(getline(archivo, line)){
+		for(int i = 0; i<line.length(); i++){
+			if(line[i] != '\t' && line[i] != ' ' && line[i] != '\r'){
+				line = line.substr(i, line.length());
+				break;
+			}
+		}
 		int first = line.find(';');
 		if(first != string::npos && line.substr(0, first) == product.nombre){
 			int second = line.find(';', first+1);
