@@ -36,14 +36,11 @@ int get_category(string category, int stop){
 			continue;
 			case '}':
 				if(ult_barra != string::npos){
-					found_category = current_category == category && found_category ? false : found_category;
-					current_category.erase(ult_barra);
-					if(end_cat){
+					if(current_category == category){
 						return current_line;
 					}
-					if(current_category == category && found_category){
-						end_cat = true;
-					}
+					found_category = current_category == category && found_category ? false : found_category;
+					current_category.erase(ult_barra);
 				}
 			continue;
 			case ';':
