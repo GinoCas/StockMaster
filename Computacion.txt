@@ -1,15 +1,15 @@
 hardware{
 Placas de video{
-		"gtx";5;XDE;"descripcion";
-"amd";5;Jasjdjas;"descripcion";
-		"amd";5;Jasjdjas;"descripcion";
-		"xd";5;Jasjdjas;"descripcion";
-		"no se";5;Jasjdjas;"descripcion";
+		gtx;5;XDE;descripcion;
+amd;5;Jasjdjas;descripcion;
+		amd;5;Jasjdjas;descripcion;
+		xd;5;Jasjdjas;descripcion;
+		no se;5;Jasjdjas;descripcion;
 	}
 }
 software{
 	Microsoft{
-		"Windows 10";5;Te veo;"fdgsdfgdsfgdfg";
+		Windows 10;5;Te veo;fdgsdfgdsfgdfg;
 	}
 }
 
@@ -191,11 +191,25 @@ software{
                                                                
                  
                       
-                      
-                 
                  
                       
                  
+                      
+                 
+              
+              
+               
+              
+              
+              
+               
+                                          
+                
+              
+               
+          
+                    
+                                   
+                     
                    
-                 
-                        
+                             

@@ -469,14 +469,14 @@ void product_info(Producto product, int upd){
 				return product_info(product, false);
 			}
 			add_text_to_file("Historial.txt", product.persona + ";" + "Se quitó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
-			delet_line_from_file(find_product_in_category(product));
+			delet_line_from_file(find_product(product));
 		return menu_principal(false);
 		case 2:
 			opty = lasty;
 			if(upd == 2){
 				cursor(62,2);
 				cout<<"\033[K";
-				return update_menu(0);
+				return update_menu(1);
 			}
 			vector<Producto> c_products = get_products_in_category(menu.current_category);
 		return my_products(c_products); //update_menu(1);
@@ -611,7 +611,7 @@ void historial(){
 }
 
 void edit_product(Producto product){
-	int line = find_product_in_category(product);
+	int line = find_product(product);
 	vector<string> categories = get_category_list("", true);
 	string current_category = "";
 	int last_slash;
@@ -634,6 +634,7 @@ void edit_product(Producto product){
 	cout<<after_text;
 	opt = 0, opty = 0;
 	int line_desc = 8, last_stock = product.stock;
+	string last_name = product.nombre;
 	do{
 		switch(opt){
 			case 0:
@@ -672,7 +673,21 @@ void edit_product(Producto product){
 				cout<<"  ";
 			break;
 		}
+		line_desc = 10 + ceil(product.descripcion.length() / 44);
+		cursor(0, line_desc+1);
+		escribir("[esp=59]");
 		if(last_char == '\r' && opt == 4){
+			if(opty == 0){
+				cursor(0, line_desc+1);
+				if(product.nombre.empty()){
+					cout<<"\033[1;31mNo se puede añadir un producto sin nombre.\033[1;33m";
+					continue;	
+				}
+				if(last_name != product.nombre && find_product(product) != -1){
+					cout<<"\033[1;31mYa tienes un producto igual a este.\033[1;33m";
+					continue;
+				}
+			}
 			break;
 		}
 	}while(true);
@@ -686,7 +701,7 @@ void edit_product(Producto product){
 		return menu_principal(false);
 	}
 	last_slash = current_category.find_last_of('/');
-	string current_product = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + product.persona + ";\"" + product.descripcion +  "\";";
+	string current_product =  product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	if(current_category.substr(last_slash+1) != product.categoria){
 		delet_line_from_file(line);
 		line = get_category(current_category, true) + 1;
@@ -713,6 +728,7 @@ void add_product(){
 	opt = 0, opty = 0;
 	int line_desc = 8;
 	cursor(0,22);
+	product.persona = usuario.name;
 	do{
 		switch(opt){
 			case 0:
@@ -752,7 +768,21 @@ void add_product(){
 				cout<<"  ";
 			break;
 		}
+		line_desc = 10 + ceil(product.descripcion.length() / 44);
+		cursor(0, line_desc+1);
+		escribir("[esp=59]");
 		if(last_char == '\r' && opt == 4){
+			if(opty == 0){
+				cursor(0, line_desc+1);
+				if(product.nombre.empty()){
+					cout<<"\033[1;31mNo se puede añadir un producto sin nombre.\033[1;33m";
+					continue;	
+				}
+				if(find_product(product) != -1){
+					cout<<"\033[1;31mYa tienes un producto igual a este.\033[1;33m";
+					continue;
+				}
+			}
 			break;
 		}
 	}while(true);
@@ -762,5 +792,5 @@ void add_product(){
 	}
 	line = get_category(current_category, true);
 	add_text_to_file("Historial.txt", usuario.name + ";" + "Se agregó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
-	add_text_to_file("Computacion.txt", '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario.name + ";\"" + product.descripcion +  "\";", line+1);
+	add_text_to_file("Computacion.txt", product.nombre + ';' + to_string(product.stock) + ";" + usuario.name + ';' + product.descripcion + ';', line+1);
 }

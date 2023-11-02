@@ -46,9 +46,6 @@ int get_category(string category, int stop){
 					}
 				}
 			continue;
-			case '"':
-				texto = "";	
-			continue;
 			case ';':
 				texto = "";
 			continue;
@@ -62,7 +59,7 @@ vector<string> get_category_list(string category, bool all){
 	archivo = fopen("Computacion.txt", "rt");
 	string current_category = "", texto = "";
 	vector<string> categories;
-	bool on_quotes = false, found_category = false;
+	bool found_category = false;
 	char letra;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
@@ -107,7 +104,7 @@ vector<Producto> get_products_in_category(string category){
 	string current_category = "", texto = "";
 	vector<Producto> products;
 	Producto product;
-	bool on_quotes = false, found_category = false;
+	bool found_category = false;
 	int property_count = 0;
 	char letra;
 	if(category == ""){
@@ -137,12 +134,6 @@ vector<Producto> get_products_in_category(string category){
 					current_category.erase(ult_barra);
 				}
 			continue;
-			case '"':
-				on_quotes = !on_quotes;
-				if(on_quotes == true){
-					texto = "";
-				}
-			continue;
 			case ';':
 				switch(property_count){
 					case 0:
@@ -168,15 +159,18 @@ vector<Producto> get_products_in_category(string category){
 	}
 	return products;
 }
-int find_product_in_category(Producto product){
+int find_product(Producto product){
 	int current_line = 0;
-	//FILE *archivo = fopen("Computacion.txt", "r");  // Reemplaza "mi_archivo.txt" con el nombre de tu archivo
 	ifstream archivo("Computacion.txt");
 	string line = "";
-	string searching_for = '"' + product.nombre + "\";" + to_string(product.stock) + ";" + product.persona + ";\"" + product.descripcion +  "\";";
+	string searching_for = product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	while(getline(archivo, line)){
-		if(line.find(searching_for) != string::npos){
-			return current_line+1;
+		int first = line.find(';');
+		if(first != string::npos && line.substr(0, first) == product.nombre){
+			int second = line.find(';', first+1);
+			if(line.substr(second + 1, line.find(';', second+1) - second - 1) == product.persona){
+				return current_line+1;
+			}
 		}
 		current_line++;
 	}

@@ -220,7 +220,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	cursor(x_start + carac_idx % x_end, y_start + ceil(carac_idx / x_end));
 	int before = 0;
 	while((carac = getch()) != '\r'){
-		if(carac == '\\'){
+		if(carac == '\\' || carac == ';'){
 			continue;
 		}
 		if(carac == ' ' && carac_idx < char_limit){
