@@ -18,9 +18,6 @@ void inicio();
 int main(){
 	SetConsoleOutputCP(CP_UTF8);
 	system("chcp 65001");
-	HANDLE wHnd = GetStdHandle(STD_OUTPUT_HANDLE); //Ajustar consola
-    SMALL_RECT windowSize = {0, 0, 120, 30};
-    SetConsoleWindowInfo(wHnd, 1, &windowSize);
 	inicio();
 }
 
