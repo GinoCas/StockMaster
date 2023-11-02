@@ -72,6 +72,7 @@ vector<Producto> update_products(vector<Producto> productos){
 		int id = i + (8 * (menu.productPage-1));
 		cursor(xcursor, 5 + ceil(i / 2) * 5);
 		string stock_text = productos[id].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
+		stock_text = productos[id].stock < 5 ? "\033[1;33mPoco Stock" : stock_text;
 		cout<<"- "<<cut_text(productos[id].nombre, 12)<<" * " + stock_text + "\033[0m";
 		cursor(xcursor, 6 + ceil(i / 2) * 5);
 		cout<<"  Usuario:"<<productos[id].persona;
@@ -507,6 +508,7 @@ void my_products(vector<Producto> products){
 		count++;
 		if(count < 11){
 			string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
+			stock_text = products[i].stock < 5 ? "\033[1;33mPoco Stock" : stock_text;
 			cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";	
 		}	
 		c_products.push_back(products[i]);

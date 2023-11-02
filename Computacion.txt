@@ -1,5 +1,6 @@
 hardware{
 Placas de video{
+test;5;gino;asdasd;
 gtx;1;XDE;descripcion;
 		amd;5;Jasjdjas;descripcion;
 		amd;5;Jasjdjas;descripcion;

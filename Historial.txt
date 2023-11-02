@@ -1,4 +1,9 @@
 usuario;accion;
+gino;Se actualizo el stock de test: 5 unidades. 02/11/23 08:34 AM
+gino;Se actualizo el stock de test: 4 unidades. 02/11/23 08:32 AM
+gino;Se modificó el producto test. 02/11/23 08:32 AM
+gino;Se actualizo el stock de test: 5 unidades. 02/11/23 08:32 AM
+gino;Se agregó el producto test. 02/11/23 08:32 AM
 gino;Se quitó el producto asdasdasd. 02/11/23 08:29 AM
 gino;Se quitó el producto xd. 02/11/23 08:29 AM
 gino;Se quitó el producto xdxd. 02/11/23 08:29 AM
