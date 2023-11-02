@@ -53,8 +53,20 @@ void menu_principal(bool from_login){
 	}
 	return update_menu(true);
 }
-vector<Producto> update_products(vector<Producto> productos){
-	sort(productos.begin(), productos.end(), [](const Producto& a, const Producto& b) {
+
+vector<Producto> filter_products(vector<Producto> productos, string browser){
+	vector<Producto> filteredProducts;
+	for(const Producto& producto : productos){
+        if(minus_transform(producto.nombre).find(minus_transform(browser)) != std::string::npos) {
+            filteredProducts.push_back(producto);
+        }
+    }
+    return filteredProducts;
+}
+vector<Producto> update_products(string browser, bool show){
+	vector<Producto> products = get_products_in_category(menu.current_category);
+	products = filter_products(products, browser);
+	sort(products.begin(), products.end(), [](const Producto& a, const Producto& b) {
         if (a.stock > 0 && b.stock <= 0) {
             return true;
         } else if (a.stock <= 0 && b.stock > 0) {
@@ -62,20 +74,23 @@ vector<Producto> update_products(vector<Producto> productos){
         }
         return a.stock < b.stock;
     });
-	empty_section(62, 5, 24, 60);
-	menu.productLimit = min(8, static_cast<int>(productos.size()) - (menu.productPage - 1) * 8);
+	menu.productLimit = min(8, static_cast<int>(products.size()) - (menu.productPage - 1) * 8);
 	if(menu.productLimit < 1){
 		menu.productLimit = 0;
 	}
+	if(!show){
+		return products;
+	}
+	empty_section(62, 5, 24, 60);
 	for(int i = 0; i<menu.productLimit; i++){
 		int xcursor = i % 2 == 0 ? 62 : 92;
 		int id = i + (8 * (menu.productPage-1));
 		cursor(xcursor, 6 + ceil(i / 2) * 5);
-		string stock_text = productos[id].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
-		stock_text = productos[i].stock < 5 && productos[i].stock != 0 ? "\033[1;33mPoco Stock" : stock_text;
-		cout<<"- "<<cut_text(productos[id].nombre, 12)<<" * " + stock_text + "\033[0m";
+		string stock_text = products[id].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
+		stock_text = products[i].stock < 5 && products[i].stock != 0 ? "\033[1;33mPoco Stock" : stock_text;
+		cout<<"- "<<cut_text(products[id].nombre, 12)<<" * " + stock_text + "\033[0m";
 		cursor(xcursor, 7 + ceil(i / 2) * 5);
-		cout<<"  Usuario:"<<productos[id].persona;
+		cout<<"  Usuario:"<<products[id].persona;
 		if(i % 2 == 1 && i+1 != menu.productLimit){
 			cursor(62, 9 + ceil(i / 2) * 5);
 			escribir("[esp=58][line=-]");
@@ -85,21 +100,21 @@ vector<Producto> update_products(vector<Producto> productos){
 	escribir("Buscador:");
 	cursor(85, 25);
 	cout<<"       ";
-	if(productos.size() > 8){
+	if(products.size() > 8){
 		cursor(87, 25);
 		if(menu.productPage != 1){
 			cursor(85, 25);
 			cout<<"<";
 			cursor(87, 25);
 		}
-		cout<<menu.productPage<<"/"<<ceil(productos.size() / 8.0);
-		if(menu.productPage != ceil(productos.size() / 8.0)){
+		cout<<menu.productPage<<"/"<<ceil(products.size() / 8.0);
+		if(menu.productPage != ceil(products.size() / 8.0)){
 			cout<<" >";
 		}else{
 			cout<<"  ";
 		}
 	}
-	return productos;
+	return products;
 }
 void update_category(vector<string> categories){
 	empty_section(0, 9, 15, 59);
@@ -144,16 +159,17 @@ void update_category(vector<string> categories){
 	menu.categoryLimit += usuario.admin*3;
 	return;
 }
+string browser = "";
 void update_menu(int upd){
 	bool done = false;
 	vector<string> categorias = get_category_list(menu.current_category, false);
-	vector<Producto> productos = get_products_in_category(menu.current_category);
+	vector<Producto> productos = update_products(browser, false);
 	if(upd == 1){
 		update_category(categorias); //Show categories
 		write_menu();	
 	}
 	if(upd != 0){
-		productos = update_products(productos); //Show products
+		productos = update_products(browser, true); //Show products
 	}
 	int lasty = opty;
 	do{
@@ -184,8 +200,12 @@ void update_menu(int upd){
 					cursor(61, 6 + (opt-1) * 5);
 					break;
 				}
-				input_text("", 48, 1, '\0', 50, 72, 4);
-				if(opt != 0){
+				browser = input_text(browser, 48, 1, '\0', 50, 72, 4);
+				if(opt != 0 || last_char == '\r'){
+					if(last_char == '\r'){
+						menu.productPage = 1;
+						productos = update_products(browser, true);
+					}
 					continue;
 				}
 			break;
@@ -217,13 +237,13 @@ void update_menu(int upd){
 			if(opty == 5){
 				if(menu.productPage == ceil(productos.size() / 8.0)){
 					opty = 0;
-					opt = 1;
+					opt = 0;
 					printf(" -");
 					continue;
 				}
 				menu.productPage++;
 				opty = 3;
-				productos = update_products(productos);
+				productos = update_products(browser, true);
 				opt = opt > ceil(menu.productLimit / 2.0) ? ceil(menu.productLimit / 2.0) : opt;
 				cursor(61, 5 + (opt-1) * 5);
 				continue;
@@ -232,7 +252,7 @@ void update_menu(int upd){
 				if(menu.productPage != 1){
 					menu.productPage--;
 					opty = 4;
-					productos = update_products(productos);
+					productos = update_products(browser, true);
 					cursor(61, 5 + (opt-1) * 5);
 					continue;
 				}
@@ -395,6 +415,8 @@ void update_menu(int upd){
 		mayus = mayus_transform(categorias[id]);		
 		update = menu.current_category + "/" + categorias[id];
 		opt = 1;
+		menu.productPage = 1;
+		menu.categoryPage = 1;
 	}
 	cursor(21-mayus.length()/2,2);
 	if(update.length() != 0){
@@ -403,7 +425,6 @@ void update_menu(int upd){
 		if(menu.current_category == ""){
 			return update_menu(0);
 		}
-		cout<<"BRUH";
 		cursor(13,2);
 		printf("\033[2K\033[1;34mSTOCKMANAGER - MENÚ PRINCIPAL\033[0m", mayus.c_str());
 	}
@@ -634,7 +655,7 @@ void historial(){
 	printf("\n\n ");
 	escribir("[esp=52][line==]");
 	write_menu();
-	update_products(get_products_in_category(menu.current_category));
+	update_products("", true);
 }
 
 void edit_product(Producto product){
@@ -730,7 +751,6 @@ void edit_product(Producto product){
 	if(opty == 1){
 		return menu_principal(false);
 	}
-	cout<<line;
 	last_slash = current_category.find_last_of('/');
 	string current_product =  product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	if(current_category.substr(last_slash+1) != product.categoria){
@@ -788,7 +808,6 @@ void add_product(){
 			case 3:
 				after_text = "\033[1;37m\n Cargado por: \033[1;33m" + usuario.name + "\033[1;37m\n                    Aceptar    Cancelar\033[1;33m";
 				product.descripcion = input_text(product.descripcion, 790, 4, '\0', 44, 15, 8);
-				last_char = ' ';
 			break;
 			case 4:
 				line_desc = 10 + ceil(product.descripcion.length() / 44);

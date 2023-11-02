@@ -1,4 +1,8 @@
 usuario;accion;
+gino;Se agregó el producto sa. 02/11/23 04:41 PM
+gino;Se agregó el producto s. 02/11/23 04:41 PM
+gino;Se modificó el producto asdasd. 02/11/23 04:02 PM
+gino;Se agregó el producto asdasdasd. 02/11/23 10:10 AM
 gino;Se agregó el producto asdfasdf. 02/11/23 09:58 AM
 gino;Se agregó el producto sdafasdf. 02/11/23 09:57 AM
 gino;Se agregó el producto asdfasdfasdf. 02/11/23 09:57 AM

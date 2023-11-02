@@ -1,4 +1,7 @@
 hardware{
+sa;0;gino;;
+s;0;gino;x;
+asdasdasd;0;gino;;
 asdfasdf;0;gino;;
 sdafasdf;0;gino;;
 asdfasdfasdf;0;gino;;
@@ -14,6 +17,18 @@ software{
 	Microsoft{
 		Windows 10;5;Te veo;fdgsdfgdsfgdfg;
 	}
+}
+d{
+
+}
+f{
+
+}
+g{
+
+}
+x{
+
 }
 
 
@@ -229,3 +244,29 @@ software{
               
                       
                    
+  
+
+ 
+  
+
+ 
+  
+
+ 
+  
+  
+
+ 
+
+ 
+  
+
+ 
+  
+
+ 
+
+ 
+  
+
+ 
