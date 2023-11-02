@@ -7,6 +7,7 @@
 #include <string.h>
 #include <windows.h>
 #include <locale>
+#include <ctime>
 #include "Librerias\specialprint.h"
 #include "Librerias\verify.h"
 #include "Librerias\Login.h"

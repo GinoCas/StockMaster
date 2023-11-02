@@ -15,8 +15,22 @@ struct StockMenu{
 StockMenu menu;
 void update_menu(int), product_info(Producto, int), add_product(), my_products(vector<Producto>), edit_product(Producto), historial();
 
+void write_menu(){
+	cursor(0,9);
+	for(int i = 0; i<30; i++){ //Division de pantalla
+		cursor(60, i);
+		cout<<"|";
+	}
+	cursor(0,-1);
+	escribir("[esp=120][line=-]"); //Foot
+	escribir("\n[esp=48]Gino Casentini @2023-2023");
+	cursor(62, 3);
+	escribir("[esp=58][line==]");
+	cursor(83,2);
+	cout<<"\033[1;36mSTOCK DISPONIBLE\033[0m\n";
+}
 void menu_principal(bool from_login){
-	system("cls");
+	system("cls");	
 	cout<<" ";
 	escribir("[esp=52][line==]");
 	escribir("\n[esp=12]");
@@ -125,18 +139,7 @@ void update_menu(int upd){
 	vector<Producto> productos = get_products_in_category(menu.current_category);
 	if(upd == 1){
 		update_category(categorias); //Show categories
-		cursor(0,9);
-		for(int i = 0; i<30; i++){ //Division de pantalla
-			cursor(60, i);
-			cout<<"|";
-		}
-		cursor(0,-1);
-		escribir("[esp=120][line=-]"); //Foot
-		escribir("\n[esp=48]Gino Casentini @2023-2023");
-		cursor(62, 3);
-		escribir("[esp=58][line==]");
-		cursor(83,2);
-		cout<<"\033[1;36mSTOCK DISPONIBLE\033[0m\n";	
+		write_menu();	
 	}
 	if(upd != 0){
 		update_products(productos); //Show products
@@ -465,7 +468,7 @@ void product_info(Producto product, int upd){
 			if(opty == 1){
 				return product_info(product, false);
 			}
-			add_text_to_file("Historial.txt", product.persona + ";" + "Se quitó el producto " + product.nombre + ".", 1);
+			add_text_to_file("Historial.txt", product.persona + ";" + "Se quitó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
 			delet_line_from_file(find_product_in_category(product));
 		return menu_principal(false);
 		case 2:
@@ -473,7 +476,7 @@ void product_info(Producto product, int upd){
 			if(upd == 2){
 				cursor(62,2);
 				cout<<"\033[K";
-				return update_menu(1);
+				return update_menu(0);
 			}
 			vector<Producto> c_products = get_products_in_category(menu.current_category);
 		return my_products(c_products); //update_menu(1);
@@ -493,37 +496,70 @@ void my_products(vector<Producto> products){
 		}
 		cursor(0, 4+count);
 		count++;
-		string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
-		cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";
+		if(count < 11){
+			string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
+			cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m";	
+		}	
 		c_products.push_back(products[i]);
 	}
-	cursor(0, 4+count);
+	int pages = ceil((c_products.size()-1) / 10), page = 1;
+	count = min(10, static_cast<int>(c_products.size()));
+	cursor(0, 5+count);
 	escribir("[esp=13]- Movimientos   - Volver");
 	bool done = false;
 	opt = 0;
 	opty = 0;
+	int lasty = 0;
 	do{
+		if(page != opty+1 && opt != count){
+			page = opty+1;
+			empty_section(0, 4, 25, 59);
+			cursor(0, 4);
+			count = 0;
+			for(int i = 0; i<c_products.size(); i++){
+				if(i < 10*page && i >= 10*(page-1)){
+					string stock_text = products[i].stock > 0 ? "\033[1;32mEn Stock" : "\033[1;31mSin Stock";
+					cout<<" - "<<products[i].nombre<<" * " + stock_text + "\033[0m"<<endl;
+					count++;	
+				}	
+			}
+			cursor(0, 5+count);
+			int max_of_page = min(10, static_cast<int>(c_products.size()) - (page - 1) * 10);
+			opt = opt > max_of_page ? max_of_page-1 : opt;
+			escribir("[esp=13]- Movimientos   - Volver");
+		}
+		if(pages > 0){
+			cursor(0, 4+count);
+			escribir("[esp=20]");
+			cursor(0, 4+count);
+			cout<<" ← "<<page<<"/"<<pages+1<<" →";
+		}
 		if(opt != count){
 			cursor(2, 4+opt);
 			cout<<">";	
 			cursor(1, 4+opt);
 		}else{
-			cursor(14 + 16 * opty, 4+count);
+			cursor(14 + 16 * opty, 5+count);
 			cout<<">";
-			cursor(13 + 16 * opty, 4+count);
+			cursor(13 + 16 * opty, 5+count);
 		}
 		last_char = getch();
 		if(opt == count){
+
 			change_option_two_dim(1,count);
+			if(opt != count){
+				opty = lasty;
+			}
 		}else{
-			change_option(count);	
+			change_option_two_dim(pages,count);
+			lasty = opty;
 		}
 		cout<<" -";
 		done = last_char == '\r';
 	}while(!done);
 	if(opt == count){
 		if(opty == 1){
-			return menu_principal(false);	
+			return menu_principal(1);	
 		}
 		if(opty == 0){
 			historial();
@@ -535,14 +571,16 @@ void my_products(vector<Producto> products){
 }
 
 void historial(){
-	cursor(0,2);
-	escribir("[esp=59]");
-	cursor(22,2);
+	empty_section(0, 0, 29, 120);
+	cursor(50,2);
 	cout<<"MOVIMIENTOS";
+	cursor(29,1);
+	escribir("[esp=52][line==]");
+	cursor(29,3);
+	escribir("[esp=52][line==]");
 	int page = 1, lasty = 0;
 	opty = 0;
 	do{
-		empty_section(0, 4, 25, 59);
 		cursor(0,4);
 		page = ceil(show_history(opty+1) / 20.0);
 		if(page > 1){
@@ -551,12 +589,25 @@ void historial(){
 		cout<<"\n > Volver";
 		cursor(0,-1);
 		lasty = opty;
-		last_char = getch();
-		change_option_y(page-1);
+		do{
+			last_char = getch();
+			change_option_y(page-1);
+			if(last_char == '\r'){
+				break;
+			}	
+		}while(opty == lasty);
 		if(last_char == '\r'){
 			break;
-		}	
+		}
+		empty_section(0, 4, 25, 120);
 	}while(true);
+	system("cls");
+	cout<<" ";
+	escribir("[esp=52][line==]");
+	printf("\n\n ");
+	escribir("[esp=52][line==]");
+	write_menu();
+	update_products(get_products_in_category(menu.current_category));
 }
 
 void edit_product(Producto product){
@@ -626,9 +677,9 @@ void edit_product(Producto product){
 		}
 	}while(true);
 	if(last_stock != product.stock){
-		add_text_to_file("Historial.txt", product.persona + ";" + "Se actualizo el stock de " + product.nombre + ": " + to_string(product.stock) + " unidades.", 1);
+		add_text_to_file("Historial.txt", product.persona + ";" + "Se actualizo el stock de " + product.nombre + ": " + to_string(product.stock) + " unidades. " + get_day() + ' ' + get_hour(), 1);
 	}else{
-		add_text_to_file("Historial.txt", product.persona + ";" + "Se modificó el producto " + product.nombre + ".", 1);
+		add_text_to_file("Historial.txt", product.persona + ";" + "Se modificó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
 	}
 	cout<<"\033[0m";
 	if(opty == 1){
@@ -710,6 +761,6 @@ void add_product(){
 		return;
 	}
 	line = get_category(current_category, true);
-	add_text_to_file("Historial.txt", usuario.name + ";" + "Se agregó el producto " + product.nombre + ".", 1);
+	add_text_to_file("Historial.txt", usuario.name + ";" + "Se agregó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
 	add_text_to_file("Computacion.txt", '"' + product.nombre + "\";" + to_string(product.stock) + ";" + usuario.name + ";\"" + product.descripcion +  "\";", line+1);
 }

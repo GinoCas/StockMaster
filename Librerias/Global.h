@@ -3,6 +3,7 @@
 #include <string.h>
 #include <cmath>
 #include <algorithm>
+#include <iomanip>
 
 using namespace std;
 
@@ -46,7 +47,7 @@ int show_history(int page){
 		if(letra == '\n'){
 			if(!skip_line && count_point > 0){
 				if(count >= (20*(page-1)) && count < 20*page){
-					cout<<" "<<cut_text(text, 54)<<endl;
+					cout<<" "<<text<<endl;
 				}
 				count++;
 			}
@@ -427,4 +428,24 @@ string cut_text(string text, int limit)
 		resultado += text[i];
 	}
 	return resultado;
+}
+
+string get_hour(){
+	time_t now = time(0);
+	tm* timeinfo = localtime(&now);
+	string ampm = (timeinfo->tm_hour < 12) ? "AM" : "PM";
+	int hour12 = (timeinfo->tm_hour > 12) ? timeinfo->tm_hour - 12 : timeinfo->tm_hour;
+    if (hour12 == 0) {
+        hour12 = 12;
+    }
+    ostringstream horaEnFormato;
+    horaEnFormato<<std::setw(2)<<std::setfill('0')<<hour12<<':'<<std::setw(2)<<timeinfo->tm_min<<' '<<ampm;
+    return horaEnFormato.str();
+}
+string get_day(){
+	time_t now = time(0);
+	tm* timeinfo = localtime(&now);
+	std::ostringstream fechaEnFormato;
+    fechaEnFormato<<std::setw(2)<<std::setfill('0')<<timeinfo->tm_mday<<'/'<<std::setw(2)<<std::setfill('0')<<(timeinfo->tm_mon + 1)<<'/'<<(timeinfo->tm_year + 1900) % 100;
+    return fechaEnFormato.str();
 }

@@ -1,13 +1,7 @@
 hardware{
-"fgadsdfg";13;gino;"";
-"kgfdkdfg";0;gino;"";
-"bruh";0;gino;"";
-"xdxd";0;gino;"";
-"asdfadsfsdaf";0;gino;"";
-"fdsgdsfg";100000;gino;"asffasd";
 Placas de video{
 		"gtx";5;XDE;"descripcion";
-		"amd";5;Jasjdjas;"descripcion";
+"amd";5;Jasjdjas;"descripcion";
 		"amd";5;Jasjdjas;"descripcion";
 		"xd";5;Jasjdjas;"descripcion";
 		"no se";5;Jasjdjas;"descripcion";
@@ -187,3 +181,21 @@ software{
                     
                      
                      
+                      
+                     
+                 
+  
+                 
+                         
+                                 
+                                                               
+                 
+                      
+                      
+                 
+                 
+                      
+                 
+                   
+                 
+                        

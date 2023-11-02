@@ -1,39 +1,24 @@
 usuario;accion;
-gino;Se agregó el producto WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-gino;Se quitó el producto asdfasdf.
-gino;Se modificó el producto asdfasdf.
-gino;Se agregó el producto asdfasdf.
-
+XDE;Se modificó el producto gtxsfdgsdfg. 02/11/23 04:22 AM
+gino;Se quitó el producto dfgdfg. 02/11/23 04:20 AM
+gino;Se actualizo el stock de dfgdfg: 999999 unidades. 02/11/23 04:20 AM
+gino;Se modificó el producto dfgdfg. 02/11/23 04:20 AM
+gino;Se modificó el producto dfgdfg. 02/11/23 04:20 AM
+gino;Se agregó el producto dfgdfg. 02/11/23 04:20 AM
+XDE;Se modificó el producto gtx. 02/11/23 04:20 AM
+gino;Se quitó el producto gdfh. 02/11/23 04:20 AM
+gino;Se quitó el producto dfgdfg. 02/11/23 04:20 AM
+gino;Se agregó el producto dfgdfg. 02/11/23 04:20 AM
+gino;Se agregó el producto gdfh. 02/11/23 04:20 AM
+gino;Se quitó el producto bruh. 02/11/23 04:20 AM
+gino;Se quitó el producto fgadsdfg. 02/11/23 04:20 AM
+gino;Se quitó el producto bruh. 02/11/23 04:20 AM
+gino;Se quitó el producto bruh. 02/11/23 04:20 AM
+gino;Se quitó el producto fgadsdfg. 02/11/23 04:19 AM
+gino;Se quitó el producto fgadsdfg. 02/11/23 04:19 AM
+gino;Se quitó el producto bruh. 02/11/23 04:19 AM
+gino;Se quitó el producto WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. 02/11/23 04:19 AM
+gino;Se quitó el producto fdsgdsfg. 02/11/23 04:19 AM
+gino;Se quitó el producto asdfadsfsdaf. 02/11/23 04:19 AM
+gino;Se quitó el producto xdxd. 02/11/23 04:19 AM
+gino;Se modificó el producto xdxd. 02/11/23 03:19 AM
