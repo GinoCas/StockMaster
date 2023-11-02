@@ -190,10 +190,6 @@ void update_menu(int upd){
 				cursor(38, 5);
 			break;
 			case 3:
-				if(menu.productLimit == 0){
-					opty = 0;
-					continue;
-				}
 				if(opt != 0){
 					cursor(62, 6 + (opt-1) * 5);
 					printf(">");
@@ -205,6 +201,12 @@ void update_menu(int upd){
 					if(last_char == '\r'){
 						menu.productPage = 1;
 						productos = update_products(browser, true);
+						continue;
+					}
+					if(menu.productLimit == 0){
+						opt = 0;
+						opty = 0;
+						continue;
 					}
 					continue;
 				}
@@ -212,10 +214,6 @@ void update_menu(int upd){
 			case 4:
 				if(opt == 0){
 					opty = 3;
-					continue;
-				}
-				if(menu.productLimit == 0){
-					opty = 2;
 					continue;
 				}
 				if(menu.productLimit - 2 * (opt-1) == 1){
