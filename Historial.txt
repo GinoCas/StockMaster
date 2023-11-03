@@ -1,147 +1,19 @@
 usuario;accion;
-gino;Se agregó el producto sa. 02/11/23 04:41 PM
-gino;Se agregó el producto s. 02/11/23 04:41 PM
-gino;Se modificó el producto asdasd. 02/11/23 04:02 PM
-gino;Se agregó el producto asdasdasd. 02/11/23 10:10 AM
-gino;Se agregó el producto asdfasdf. 02/11/23 09:58 AM
-gino;Se agregó el producto sdafasdf. 02/11/23 09:57 AM
-gino;Se agregó el producto asdfasdfasdf. 02/11/23 09:57 AM
-gino;Se agregó el producto asdasd. 02/11/23 09:57 AM
-gino;Se quitó el producto test. 02/11/23 08:47 AM
-XDE;Se quitó el producto gtx. 02/11/23 08:45 AM
-stefa;Se quitó el producto test. 02/11/23 08:44 AM
-stefa;Se actualizo el stock de test: 1 unidades. 02/11/23 08:44 AM
-stefa;Se actualizo el stock de test: 4 unidades. 02/11/23 08:44 AM
-stefa;Se actualizo el stock de test: 0 unidades. 02/11/23 08:44 AM
-stefa;Se agregó el producto test. 02/11/23 08:44 AM
-gino;Se modificó el producto test. 02/11/23 08:43 AM
-stefa;Se quitó el producto test. 02/11/23 08:41 AM
-stefa;Se actualizo el stock de test: 8 unidades. 02/11/23 08:40 AM
-stefa;Se actualizo el stock de test: 5 unidades. 02/11/23 08:40 AM
-stefa;Se actualizo el stock de test: 4 unidades. 02/11/23 08:39 AM
-stefa;Se actualizo el stock de test: 1 unidades. 02/11/23 08:39 AM
-stefa;Se actualizo el stock de test: 0 unidades. 02/11/23 08:36 AM
-stefa;Se actualizo el stock de test: 1 unidades. 02/11/23 08:36 AM
-stefa;Se actualizo el stock de test: 16 unidades. 02/11/23 08:36 AM
-stefa;Se agregó el producto test. 02/11/23 08:36 AM
-XDE;Se modificó el producto gtx. 02/11/23 08:35 AM
-gino;Se actualizo el stock de test: 5 unidades. 02/11/23 08:34 AM
-gino;Se actualizo el stock de test: 4 unidades. 02/11/23 08:32 AM
-gino;Se modificó el producto test. 02/11/23 08:32 AM
-gino;Se actualizo el stock de test: 5 unidades. 02/11/23 08:32 AM
-gino;Se agregó el producto test. 02/11/23 08:32 AM
-gino;Se quitó el producto asdasdasd. 02/11/23 08:29 AM
-gino;Se quitó el producto xd. 02/11/23 08:29 AM
-gino;Se quitó el producto xdxd. 02/11/23 08:29 AM
-gino;Se quitó el producto asdasd. 02/11/23 08:29 AM
-gino;Se actualizo el stock de asdasd: 55 unidades. 02/11/23 08:29 AM
-gino;Se agregó el producto asdasdasd. 02/11/23 08:28 AM
-Jasjdjas;Se modificó el producto xd. 02/11/23 08:14 AM
-gino;Se agregó el producto xdxd. 02/11/23 08:13 AM
-gino;Se agregó el producto asdasd. 02/11/23 08:13 AM
-gino;Se agregó el producto xd. 02/11/23 08:10 AM
-XDE;Se actualizo el stock de gtx: 1 unidades. 02/11/23 07:43 AM
-XDE;Se actualizo el stock de gtx: 9 unidades. 02/11/23 07:43 AM
-XDE;Se actualizo el stock de gtx: 5 unidades. 02/11/23 07:38 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:36 AM
-XDE;Se actualizo el stock de gtx: 5 unidades. 02/11/23 07:36 AM
-XDE;Se actualizo el stock de gtx: 0 unidades. 02/11/23 07:36 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:36 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:36 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:30 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:30 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:29 AM
-XDE;Se actualizo el stock de gtx: 500000 unidades. 02/11/23 07:27 AM
-XDE;Se actualizo el stock de gtx: 1 unidades. 02/11/23 07:27 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:27 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 500 unidades. 02/11/23 07:26 AM
-XDE;Se actualizo el stock de gtx: 50 unidades. 02/11/23 07:21 AM
-gino;Se quitó el producto x. 02/11/23 07:19 AM
-gino;Se agregó el producto x. 02/11/23 07:19 AM
-stefa;Se quitó el producto dfgsdfg. 02/11/23 05:28 AM
-stefa;Se actualizo el stock de dfgsdfg: 999999 unidades. 02/11/23 05:27 AM
-stefa;Se actualizo el stock de dfgsdfg: 15 unidades. 02/11/23 05:27 AM
-stefa;Se actualizo el stock de dfgsdfg: 1 unidades. 02/11/23 05:27 AM
-gino;Se quitó el producto xd. 02/11/23 05:27 AM
-gino;Se quitó el producto xdsfasdfsadf. 02/11/23 05:27 AM
-gino;Se quitó el producto "sdfoasdfkopasdfokp". 02/11/23 05:27 AM
-gino;Se quitó el producto sdfasdf. 02/11/23 05:27 AM
-gino;Se quitó el producto x. 02/11/23 05:27 AM
-gino;Se agregó el producto xd. 02/11/23 05:26 AM
-gino;Se agregó el producto x. 02/11/23 05:26 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:26 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:10 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:10 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:07 AM
-gino;Se actualizo el stock de "sdfoasdfkopasdfokp": 2 unidades. 02/11/23 05:05 AM
-gino;Se modificó el producto "sdfoasdfkopasdfokp". 02/11/23 05:05 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:05 AM
-gino;Se modificó el producto sdfasdf. 02/11/23 05:05 AM
-gino;Se agregó el producto sdfasdf. 02/11/23 05:04 AM
-gino;Se agregó el producto "sdfoasdfkopasdfokp". 02/11/23 05:04 AM
-gino;Se agregó el producto "xdsfasdfsadf". 02/11/23 04:57 AM
-gino;Se quitó el producto xd. 02/11/23 04:56 AM
-gino;Se quitó el producto x. 02/11/23 04:56 AM
-gino;Se quitó el producto xdf. 02/11/23 04:56 AM
-gino;Se modificó el producto xdf. 02/11/23 04:56 AM
-gino;Se agregó el producto x                                            . 02/11/23 04:55 AM
-gino;Se modificó el producto xd. 02/11/23 04:53 AM
-gino;Se modificó el producto xd. 02/11/23 04:53 AM
-gino;Se modificó el producto xd. 02/11/23 04:52 AM
-gino;Se modificó el producto xd. 02/11/23 04:52 AM
-gino;Se agregó el producto xd. 02/11/23 04:50 AM
-gino;Se agregó el producto x. 02/11/23 04:49 AM
-gino;Se quitó el producto x. 02/11/23 04:48 AM
-gino;Se quitó el producto x. 02/11/23 04:48 AM
-gino;Se quitó el producto x. 02/11/23 04:48 AM
-gino;Se quitó el producto xd. 02/11/23 04:48 AM
-gino;Se agregó el producto xd. 02/11/23 04:48 AM
-gino;Se agregó el producto x. 02/11/23 04:46 AM
-gino;Se agregó el producto x. 02/11/23 04:45 AM
-stefa;Se quitó el producto . 02/11/23 04:44 AM
-gino;Se quitó el producto x. 02/11/23 04:44 AM
-gino;Se agregó el producto x. 02/11/23 04:44 AM
-gino;Se agregó el producto x. 02/11/23 04:38 AM
-stefa;Se agregó el producto . 02/11/23 04:28 AM
-stefa;Se agregó el producto dfgsdfg. 02/11/23 04:28 AM
-gino;Se quitó el producto bruh. 02/11/23 04:27 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:27 AM
-gino;Se quitó el producto bruh. 02/11/23 04:27 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:27 AM
-gino;Se quitó el producto bruh. 02/11/23 04:27 AM
-gino;Se modificó el producto bruh. 02/11/23 04:27 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:27 AM
-gino;Se quitó el producto bruh. 02/11/23 04:27 AM
-gino;Se quitó el producto WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. 02/11/23 04:27 AM
-gino;Se quitó el producto fdsgdsfg. 02/11/23 04:27 AM
-gino;Se quitó el producto asdfadsfsdaf. 02/11/23 04:27 AM
-gino;Se quitó el producto xdxd. 02/11/23 04:27 AM
-XDE;Se modificó el producto gtxsfdgsdfg. 02/11/23 04:22 AM
-gino;Se quitó el producto dfgdfg. 02/11/23 04:20 AM
-gino;Se actualizo el stock de dfgdfg: 999999 unidades. 02/11/23 04:20 AM
-gino;Se modificó el producto dfgdfg. 02/11/23 04:20 AM
-gino;Se modificó el producto dfgdfg. 02/11/23 04:20 AM
-gino;Se agregó el producto dfgdfg. 02/11/23 04:20 AM
-XDE;Se modificó el producto gtx. 02/11/23 04:20 AM
-gino;Se quitó el producto gdfh. 02/11/23 04:20 AM
-gino;Se quitó el producto dfgdfg. 02/11/23 04:20 AM
-gino;Se agregó el producto dfgdfg. 02/11/23 04:20 AM
-gino;Se agregó el producto gdfh. 02/11/23 04:20 AM
-gino;Se quitó el producto bruh. 02/11/23 04:20 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:20 AM
-gino;Se quitó el producto bruh. 02/11/23 04:20 AM
-gino;Se quitó el producto bruh. 02/11/23 04:20 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:19 AM
-gino;Se quitó el producto fgadsdfg. 02/11/23 04:19 AM
-gino;Se quitó el producto bruh. 02/11/23 04:19 AM
-gino;Se quitó el producto WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. 02/11/23 04:19 AM
-gino;Se quitó el producto fdsgdsfg. 02/11/23 04:19 AM
-gino;Se quitó el producto asdfadsfsdaf. 02/11/23 04:19 AM
-gino;Se quitó el producto xdxd. 02/11/23 04:19 AM
-gino;Se modificó el producto xdxd. 02/11/23 03:19 AM
+hola;Se quitó el producto xd. 02/11/23 09:56 PM
+hola;Se quitó el producto test. 02/11/23 09:56 PM
+hola;Se quitó el producto aas. 02/11/23 09:54 PM
+hola;Se quitó el producto a. 02/11/23 09:53 PM
+hola;Se quitó el producto dasfsadf. 02/11/23 09:53 PM
+hola;Se quitó el producto asdfasdf. 02/11/23 09:53 PM
+hola;Se quitó el producto abc. 02/11/23 09:53 PM
+hola;Se quitó el producto asd. 02/11/23 09:53 PM
+hola;Se quitó el producto af. 02/11/23 09:53 PM
+hola;Se agregó el producto asdfasdf. 02/11/23 09:47 PM
+hola;Se agregó el producto dasfsadf. 02/11/23 09:47 PM
+hola;Se agregó el producto xd. 02/11/23 09:47 PM
+hola;Se agregó el producto af. 02/11/23 09:47 PM
+hola;Se agregó el producto asd. 02/11/23 09:47 PM
+hola;Se agregó el producto a. 02/11/23 09:47 PM
+hola;Se agregó el producto aas. 02/11/23 09:47 PM
+hola;Se agregó el producto abc. 02/11/23 09:47 PM
+hola;Se agregó el producto test. 02/11/23 09:47 PM

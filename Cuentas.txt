@@ -1,4 +1,3 @@
-admin;AdminGC;1
-gino;ginomc;1
-stefa;Micontra;0
-test;xdxddd;0
+hola;AdminGC;1
+gino;testxd;0
+

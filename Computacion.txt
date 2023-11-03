@@ -1,24 +1,13 @@
-hardware{
-sa;0;gino;;
-s;0;gino;x;
-asdasdasd;0;gino;;
-asdfasdf;0;gino;;
-sdafasdf;0;gino;;
-asdfasdfasdf;0;gino;;
-asdasd;1;gino;;
-Placas de video{
-		amd;5;Jasjdjas;descripcion;
-		amd;5;Jasjdjas;descripcion;
-		xd;5;Jasjdjas;descripcion;
-		no se;5;Jasjdjas;descripcion;
-	}
-}
-software{
-	Microsoft{
-		Windows 10;5;Te veo;fdgsdfgdsfgdfg;
-	}
+
+ASDASDASDSAD{
+xdxd{
+
 }
 
+}
+nashei{
+
+}
  
       
       
@@ -322,3 +311,32 @@ software{
  
 
  
+           
+                  
+                 
+                 
+                     
+           
+               
+         
+                
+                             
+                             
+                            
+                               
+  
+ 
+         
+           
+                                     
+  
+ 
+           
+            
+               
+                 
+                 
+          
+            
+                   
+           

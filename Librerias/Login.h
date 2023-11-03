@@ -29,7 +29,7 @@ void inicio_sesion(bool create_acc){
 		switch(opt){
 			case 0:
 				cursor(9+user_name.length(), 3);
-				user_name = input_text(user_name, 16, 4, '\0', 50, 9, 3);
+				user_name = input_text(user_name, 16, 4, '\0', 50, 9, 3, 0);
 				user_name = minus_transform(user_name);
 				cursor(0, 5);
 				printf("\033[K");
@@ -45,7 +45,7 @@ void inicio_sesion(bool create_acc){
 			break;
 			case 1:
 				cursor(12+password.length(), 4);
-				password = !mostrar_contra ? input_text(password, 16, 4, '*', 50, 12, 4) : input_text(password, 32, 4, '\0', 50, 12, 4);
+				password = !mostrar_contra ? input_text(password, 16, 4, '*', 50, 12, 4, 0) : input_text(password, 32, 4, '\0', 50, 12, 4, 0);
 				cursor(0, 5);
 				printf("\033[K");
 				if(last_char != '\r'){break;}

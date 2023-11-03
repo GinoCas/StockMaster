@@ -79,9 +79,14 @@ vector<user> get_users(){
 		char letra = fgetc(archivo);
 		if(letra == '\n'){
 			count = 0;
+			if(current_user.name.empty()){
+				text = "";
+				continue;
+			}
 			current_user.admin = stoi(text);
 			users.push_back(current_user);
 			text = "";
+			current_user.name = "";
 			continue;
 		}
 		if(letra == ';'){
@@ -200,7 +205,7 @@ int arrow_pressed(){
 	return 0;
 }
 
-string input_text(string using_text, int char_limit, int opt_limit, char show, int x_end, int x_start, int y_start){
+string input_text(string using_text, int char_limit, int opt_limit, char show, int x_end, int x_start, int y_start, int opty_limit){
 	char carac; //caracter escrito
 	string text = using_text;
 	int carac_idx = using_text.length();
@@ -276,12 +281,22 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 		}
 		last_char = carac;
 		if(opt_limit != 0){
-			change_option(opt_limit);	
+			if(opty_limit != 0){
+				change_option_two_dim(opt_limit, opty_limit);
+			}else{
+				change_option(opt_limit);
+			}
 		}else if(carac == -32){
 			last_char = getch();
 		}
 		if(carac == -32 && (last_char == 72 || last_char == 80)){
 			if(opt_limit == 0){
+				continue;
+			}
+			break;
+		}
+		if(carac == -32 && (last_char == 75 || last_char == 77)){
+			if(opty_limit = 0){
 				continue;
 			}
 			break;
