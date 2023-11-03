@@ -65,6 +65,9 @@ int show_history(int page){
 		}
 		text += letra;
 	}
+	if(count == 0){
+		cout<<" No se han registrado movimientos todavía.";
+	}
 	return count;
 }
 

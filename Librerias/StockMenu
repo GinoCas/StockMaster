@@ -154,8 +154,8 @@ void update_category(vector<string> categories){
 		cursor(0, 11+menu.categoryLimit);
 		cout<<" - \033[1;31mEliminar Categoría\033[0m";
 		cursor(0, 12+menu.categoryLimit);
-	}	
-	cout<<" - \033[1;32mVolver\033[0m";
+	}
+	cout<<" - \033[1;32mVolver\033[0m";	
 	menu.categoryLimit += usuario.admin*3;
 	return;
 }
@@ -170,6 +170,10 @@ void update_menu(int upd){
 	}
 	if(upd != 0){
 		productos = update_products(browser, true); //Show products
+		if(productos.size() == 0){
+			cursor(75,10);
+			cout<<"No hay productos para mostrar.";	
+		}
 	}
 	int lasty = opty;
 	do{
@@ -200,6 +204,10 @@ void update_menu(int upd){
 				if(last_char == '\r'){
 					menu.productPage = 1;
 					productos = update_products(browser, true);
+					if(productos.size() == 0){
+						cursor(75,10);
+						cout<<"No hay productos para mostrar.";
+					}
 				}
 				if(opt != 0 && menu.productLimit == 0){
 					opt = 0;
@@ -296,6 +304,23 @@ void update_menu(int upd){
 			return menu_principal(false);
 		break;
 		case 2:
+			opty = 0;
+			do{
+				cursor(0, 20);
+				cout<<"¿Estás seguro que quieres cerrar sesión?   Sí   No";
+				cursor(42 + 5*opty, 20);
+				cout<<">";
+				cursor(42 + 5*opty, 20);
+				last_char = getch();
+				change_option_y(1);
+				if(last_char == '\r'){ break; }	
+			}while(true);
+			cursor(0,20);
+			escribir("[esp=59]");
+			if(opty == 1){
+				opty = 2;
+				return update_menu(0);
+			}
 		return;
 	}
 	if(opty > 2){
@@ -329,11 +354,31 @@ void update_menu(int upd){
 	}while(!done);
 	string mayus, update;
 	if(opt == menu.categoryLimit){
+		if(menu.current_category.empty()){
+			opty = 0;
+			do{
+				cursor(0, 20);
+				cout<<"¿Estás seguro que quieres cerrar sesión?   Sí   No";
+				cursor(42 + 5*opty, 20);
+				cout<<">";
+				cursor(42 + 5*opty, 20);
+				last_char = getch();
+				change_option_y(1);
+				if(last_char == '\r'){ break; }	
+			}while(true);
+			cursor(0,20);
+			escribir("[esp=59]");
+			if(opty == 1){
+				opty = 2;
+				return update_menu(0);
+			}
+			return;
+		}
 		int ult_barra = menu.current_category.rfind('/');
 		int ant_barra = menu.current_category.rfind('/', ult_barra-1);
 		if(ult_barra != string::npos){
 			update = menu.current_category;
-			update = update.erase(ult_barra); //menu.current_category.substr(ant_barra, ult_barra);
+			update = update.erase(ult_barra);
 			if(update.length() != 0){
 				mayus = mayus_transform(update.substr(ant_barra + 1));	
 			}	
@@ -344,6 +389,8 @@ void update_menu(int upd){
 			int last_slash;
 			vector<string> category_list = get_category_list("", true);
 			string current_category = "";
+			cursor(0,20);
+			escribir("[esp=50]");
 			if(category_list.size() != 0){
 				current_category = menu.current_category.empty() ? category_list[0] : menu.current_category;	
 			}
@@ -554,7 +601,11 @@ void my_products(vector<Producto> products){
 	}
 	int pages = ceil((c_products.size()-1) / 10), page = 1;
 	count = min(10, static_cast<int>(c_products.size()));
-	cursor(0, 5+count);
+	if(c_products.size() == 0){
+		cursor(0, 4);
+		cout<<" - No hay productos para mostrar.";
+	}
+	cursor(0, 5+count+(c_products.size() == 0));
 	escribir("[esp=13]- Movimientos   - Volver");
 	bool done = false;
 	opt = 0;
@@ -590,9 +641,9 @@ void my_products(vector<Producto> products){
 			cout<<">";	
 			cursor(1, 4+opt);
 		}else{
-			cursor(14 + 16 * opty, 5+count);
+			cursor(14 + 16 * opty, 5+count+(c_products.size() == 0));
 			cout<<">";
-			cursor(13 + 16 * opty, 5+count);
+			cursor(13 + 16 * opty, 5+count+(c_products.size() == 0));
 		}
 		last_char = getch();
 		if(opt == count){
