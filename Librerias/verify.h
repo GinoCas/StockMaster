@@ -22,7 +22,7 @@ void cursor(int x, int y){
 
 bool is_every_char_alpha(string str){
 	for(char carac : str){
-		if(!isalpha(carac)){
+		if(!isalpha(carac) && !isdigit(carac)){
 			return false;
 		}
 	}
@@ -67,7 +67,7 @@ void send_error(string err){
 	escribir("[esp=50]");
 	cursor(0,5);
 	if(err == "simbol"){
-		cout<<"\033[1;31mSimbolos, numeros y espacios no estan permitidos.\033[0m";
+		cout<<"\033[1;31mSimbolos y espacios no estan permitidos.\033[0m";
 		return;
 	}
 	if(err == "pass"){

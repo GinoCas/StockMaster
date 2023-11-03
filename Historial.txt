@@ -1,19 +1,1 @@
 usuario;accion;
-hola;Se quitó el producto xd. 02/11/23 09:56 PM
-hola;Se quitó el producto test. 02/11/23 09:56 PM
-hola;Se quitó el producto aas. 02/11/23 09:54 PM
-hola;Se quitó el producto a. 02/11/23 09:53 PM
-hola;Se quitó el producto dasfsadf. 02/11/23 09:53 PM
-hola;Se quitó el producto asdfasdf. 02/11/23 09:53 PM
-hola;Se quitó el producto abc. 02/11/23 09:53 PM
-hola;Se quitó el producto asd. 02/11/23 09:53 PM
-hola;Se quitó el producto af. 02/11/23 09:53 PM
-hola;Se agregó el producto asdfasdf. 02/11/23 09:47 PM
-hola;Se agregó el producto dasfsadf. 02/11/23 09:47 PM
-hola;Se agregó el producto xd. 02/11/23 09:47 PM
-hola;Se agregó el producto af. 02/11/23 09:47 PM
-hola;Se agregó el producto asd. 02/11/23 09:47 PM
-hola;Se agregó el producto a. 02/11/23 09:47 PM
-hola;Se agregó el producto aas. 02/11/23 09:47 PM
-hola;Se agregó el producto abc. 02/11/23 09:47 PM
-hola;Se agregó el producto test. 02/11/23 09:47 PM
