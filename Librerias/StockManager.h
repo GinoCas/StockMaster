@@ -160,7 +160,6 @@ int find_product(Producto product){
 	int current_line = 0;
 	ifstream archivo("Computacion.txt");
 	string line = "";
-	string searching_for = product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
 	while(getline(archivo, line)){
 		for(int i = 0; i<line.length(); i++){
 			if(line[i] != '\t' && line[i] != ' ' && line[i] != '\r'){
@@ -169,9 +168,9 @@ int find_product(Producto product){
 			}
 		}
 		int first = line.find(';');
-		if(first != string::npos && line.substr(0, first) == product.nombre){
+		if(first != string::npos && minus_transform(line.substr(0, first)) == minus_transform(product.nombre)){
 			int second = line.find(';', first+1);
-			if(line.substr(second + 1, line.find(';', second+1) - second - 1) == product.persona){
+			if(minus_transform(line.substr(second + 1, line.find(';', second+1) - second - 1)) == minus_transform(product.persona)){
 				return current_line+1;
 			}
 		}

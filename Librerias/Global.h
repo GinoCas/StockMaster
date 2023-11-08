@@ -299,7 +299,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 			break;
 		}
 		if(carac == -32 && (last_char == 75 || last_char == 77)){
-			if(opty_limit = 0){
+			if(opty_limit == 0){
 				continue;
 			}
 			break;
@@ -378,6 +378,10 @@ int input_number(int num, int num_max, int opt_limit){
 		return num;
 	}
     int carac_num = atoi(&carac);
+    if(num == 0){
+    	num = carac_num;
+    	return num;
+	}
     if(carac_num >= 0){
     	int before = num;
     	num = num * 10 + carac_num;
@@ -451,6 +455,21 @@ string cut_text(string text, int limit)
 	}
 	return resultado;
 }
+
+string to_just_one_space(string word){
+	string output = "";
+	bool prev_is_space = false;
+	for(char car : word){
+		if(!isspace(car)){
+			output += car;
+			prev_is_space = false;
+		}else if(!prev_is_space){
+			output += ' ';
+			prev_is_space = true;
+		}
+	}
+	return output;
+} 
 
 string get_hour(){
 	time_t now = time(0);

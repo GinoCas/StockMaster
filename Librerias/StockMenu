@@ -56,8 +56,10 @@ void menu_principal(bool from_login){
 
 vector<Producto> filter_products(vector<Producto> productos, string browser){
 	vector<Producto> filteredProducts;
+	browser = to_just_one_space(minus_transform(browser));
 	for(const Producto& producto : productos){
-        if(minus_transform(producto.nombre).find(minus_transform(browser)) != std::string::npos) {
+		string product_name = to_just_one_space(minus_transform(producto.nombre));
+        if(product_name.find(browser) != std::string::npos || producto.persona.find(browser) != std::string::npos){
             filteredProducts.push_back(producto);
         }
     }
@@ -97,7 +99,7 @@ vector<Producto> update_products(string browser, bool show){
 		}
 	}
 	cursor(62, 4);
-	escribir("Buscador:");
+	escribir("Buscador: " + browser);
 	cursor(85, 25);
 	cout<<"       ";
 	if(products.size() > 8){
@@ -281,7 +283,7 @@ void update_menu(int upd){
 				printf("   ");	
 			}
 			continue;
-		}else if(opty == 1 && categorias.empty()){
+		}else if(opty == 1 && categorias.empty() && menu.current_category == ""){
 			cursor(0, 20);
 			escribir("[esp=50]");
 			cursor(0,20);
@@ -395,9 +397,19 @@ void update_menu(int upd){
 				current_category = menu.current_category.empty() ? category_list[0] : menu.current_category;	
 			}
 			if(opt == menu.categoryLimit-3){
-				cursor(0,20);
-				cout<<"Nombre de la categoría:";
-				current_category = input_text("", 20, 0, '\0', 44, 24, 20, 0);
+				do{
+					cursor(0,20);
+					cout<<" Nombre de la categoría:";
+					current_category = input_text("", 20, 0, '\0', 44, 25, 20, 0);
+					cursor(0,19);
+					escribir("[esp=59]");
+					if(current_category.empty()){
+						cursor(0,19);
+						cout<<"\033[1;31mNo se puede crear una categoría sin nombre.\033[0m";
+						continue;
+					}	
+					break;
+				}while(true);
 				add_text_to_file("Computacion.txt", current_category + "{\n\n}", get_category(menu.current_category, 1) + 1);
 			}
 			if(opt == menu.categoryLimit-2){
@@ -406,7 +418,7 @@ void update_menu(int upd){
 					escribir("[esp=59]");
 					cursor(0,20);
 					last_slash = current_category.find_last_of('/');
-					cout<<"Seleccione una categoría: ← "<<current_category.substr(last_slash + 1)<<" →";
+					cout<<" Seleccione una categoría: ← "<<current_category.substr(last_slash + 1)<<" →";
 					current_category = select_category(current_category, -1);
 					if(last_char == '\r'){
 						break;
@@ -417,8 +429,8 @@ void update_menu(int upd){
 				cursor(0,20);
 				last_slash = current_category.find_last_of('/');
 				string edited_cat = current_category.substr(last_slash + 1);
-				cout<<"Editar categoría: "<<edited_cat;
-				edited_cat = input_text(edited_cat, 20, 0, '\0', 44, 19, 20, 0);
+				cout<<" Editar categoría: "<<edited_cat;
+				edited_cat = input_text(edited_cat, 20, 0, '\0', 44, 20, 20, 0);
 				int line = get_category(current_category, true);
 				replace_text_at_line(edited_cat + "{", line+1);
 			}
@@ -428,7 +440,7 @@ void update_menu(int upd){
 					escribir("[esp=59]");
 					cursor(0,20);
 					last_slash = current_category.find_last_of('/');
-					cout<<"Seleccione una categoría: "<<current_category.substr(last_slash + 1);
+					cout<<" Seleccione una categoría: "<<current_category.substr(last_slash + 1);
 					current_category = select_category(current_category, -1);
 					if(last_char == '\r'){
 						break;
@@ -796,14 +808,14 @@ void edit_product(Producto product){
 			opt++;
 		}
 	}while(true);
+	cout<<"\033[0m";
+	if(opty == 1){
+		return menu_principal(false);
+	}
 	if(last_stock != product.stock){
 		add_text_to_file("Historial.txt", product.persona + ";" + "Se actualizo el stock de " + product.nombre + ": " + to_string(product.stock) + " unidades. " + get_day() + ' ' + get_hour(), 1);
 	}else{
 		add_text_to_file("Historial.txt", product.persona + ";" + "Se modificó el producto " + product.nombre + ". " + get_day() + ' ' + get_hour(), 1);
-	}
-	cout<<"\033[0m";
-	if(opty == 1){
-		return menu_principal(false);
 	}
 	last_slash = current_category.find_last_of('/');
 	string current_product =  product.nombre + ';' + to_string(product.stock) + ';' + product.persona + ';' + product.descripcion + ';';
