@@ -4,26 +4,28 @@
 int get_category(string category, int stop){
 	FILE * archivo;
 	archivo = fopen("Computacion.txt", "rt");
-	
 	string current_category = "", texto = "";
 	int current_line = 0, return_line = 0;
 	bool found_category = false;
 	char letra;
 	bool end_cat = false;
+	bool char_start = false;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
-		if(letra == '\n' || letra == '\r' || letra == '\t'){
+		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start)){
 			if(letra == '\n'){
 				current_line++;
 			}
 			continue;
 		}
+		char_start = true;
 		if(letra != ' ' && letra > 31){
 			return_line = current_line;
 		}
 		int ult_barra = current_category.rfind('/');
 		switch(letra){
 			case '{':
+				char_start = false;
 				end_cat = false;
 				current_category = current_category + "/" + texto;
 				found_category = current_category == category && !found_category ? true : found_category;
@@ -35,6 +37,7 @@ int get_category(string category, int stop){
 				texto = "";
 			continue;
 			case '}':
+				char_start = false;
 				if(ult_barra != string::npos){
 					if(current_category == category){
 						return current_line;
@@ -58,14 +61,17 @@ vector<string> get_category_list(string category, bool all){
 	vector<string> categories;
 	bool found_category = false;
 	char letra;
+	bool char_start = false;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
-		if(letra == '\n' || letra == '\r' || letra == '\t'){
+		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start)){
 			continue;
 		}
+		char_start = true;
 		int ult_barra = current_category.rfind('/');
 		switch(letra){
 			case '{':
+				char_start = false;
 				current_category = current_category + "/" + texto;
 				ult_barra = current_category.rfind('/');
 				if(ult_barra != -1){
@@ -85,6 +91,7 @@ vector<string> get_category_list(string category, bool all){
 			case '}':
 				current_category.erase(ult_barra);
 				texto = "";
+				char_start = false;
 			continue;
 			case ';':
 				texto = "";

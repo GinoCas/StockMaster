@@ -1,21 +1,73 @@
-software{
+Software{
+  Sistemas Operativos{
 
-}
-hardware{
+  }
+  Aplicaciones{
 
+  }
 }
-herramientas{
 
-}
-comida{
+Hardware{
+  Gabinetes{
+    
+  }
+  Componentes{
+    Placas de Video{
+      AMD{
 
-}
-remedios{
+      }
+      NVIDIA{
 
-}
-vestimenta{
+      }
+    }
+    Procesadores{
 
+    }
+    Memoria RAM{
+
+    }
+    Almacenamiento{
+
+    }
+  }
 }
+
+Herramientas{
+  Manuales{
+
+  }
+  Eléctricas{
+
+  }
+}
+
+Comida{
+  Perecedera{
+
+  }
+  No Perecedera{
+
+  }
+}
+
+Remedios{
+  Medicamentos{
+
+  }
+  Material de Primeros Auxilios{
+
+  }
+}
+
+Vestimenta{
+  Ropa{
+
+  }
+  Calzado{
+
+  }
+}
+
       
       
 

@@ -6,13 +6,13 @@ CC       = gcc.exe
 WINDRES  = windres.exe
 OBJ      = Inicio.o test.o
 LINKOBJ  = Inicio.o test.o
-LIBS     = -L"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib" -L"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -pg
-INCS     = -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/include" -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/include" -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
-CXXINCS  = -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/include" -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/include" -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"E:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+LIBS     = -L"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib" -L"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -pg
+INCS     = -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/include" -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/include" -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/include" -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/x86_64-w64-mingw32/include" -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"D:/Personal stuff/Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
 BIN      = StockMaster.exe
 CXXFLAGS = $(CXXINCS) -pg
 CFLAGS   = $(INCS) -pg
-DEL      = E:\Personal stuff\Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable\devcpp.exe INTERNAL_DEL
+DEL      = D:\Personal stuff\Embarcadero_Dev-Cpp_6.3_TDM-GCC_9.2_Portable\devcpp.exe INTERNAL_DEL
 
 .PHONY: all all-before all-after clean clean-custom
 
