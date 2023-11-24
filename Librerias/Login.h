@@ -22,6 +22,9 @@ void inicio_sesion(bool create_acc){
 	printf("\nINGRESAR");
 	printf("\nMOSTRAR CONTRASEÑA");
 	printf("\nVOLVER");
+	cursor(0,29);
+	escribir("[esp=120][line=-]"); //Foot
+	escribir("\n[esp=48]Gino Casentini @2023-2023");
 	vector<user> user_list = get_users();
 	int user_found = 0;
 	do{
