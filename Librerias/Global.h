@@ -29,6 +29,15 @@ char last_char;
 user usuario;
 string after_text = "", cut_text(string, int);
 
+bool letras_permitidas(char letra){
+	if(letra > 31){
+		return true;
+	}
+	letra = tolower(letra);
+	string letras_aceptadas = "áéíóúüñ";
+	return letras_aceptadas.find(letra) != std::string::npos;
+}
+
 void empty_section(int xstart, int ystart, int repeat, int spaces){
 	for(int i = 0; i<repeat; i++){
 		cursor(xstart, ystart + i); 
@@ -363,6 +372,7 @@ string input_text(string using_text, int char_limit, int opt_limit, char show, i
 	}
 	return "";
 }
+
 int input_number(int num, int num_max, int opt_limit){
 	char carac = getch();
 	if(carac == '\b'){
@@ -391,6 +401,7 @@ int input_number(int num, int num_max, int opt_limit){
     }
     return num;
 }
+
 void show_text_in_margin(string text, int x_start, int x_end, int y_start){
 	string last_word = "";
 	int before, carac_idx = 0;
@@ -427,6 +438,7 @@ void show_text_in_margin(string text, int x_start, int x_end, int y_start){
 	
 	}
 }
+
 string cut_text(string text, int limit)
 {
 	if(text.length() < 13){

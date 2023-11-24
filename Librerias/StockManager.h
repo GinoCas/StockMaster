@@ -12,7 +12,7 @@ int get_category(string category, int stop){
 	bool char_start = false;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
-		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start)){
+		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start) || !letras_permitidas(letra)){
 			if(letra == '\n'){
 				current_line++;
 			}
@@ -48,6 +48,7 @@ int get_category(string category, int stop){
 			continue;
 			case ';':
 				texto = "";
+				char_start = false;
 			continue;
 		}
 		texto += letra;
@@ -64,7 +65,7 @@ vector<string> get_category_list(string category, bool all){
 	bool char_start = false;
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
-		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start)){
+		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start) || !letras_permitidas(letra)){
 			continue;
 		}
 		char_start = true;
@@ -76,7 +77,8 @@ vector<string> get_category_list(string category, bool all){
 				ult_barra = current_category.rfind('/');
 				if(ult_barra != -1){
 					string without_slash = current_category;
-					found_category = without_slash.erase(ult_barra) == category ? true : false;
+					without_slash.erase(ult_barra);	
+					found_category = without_slash == category ? true : false;
 				}
 				found_category = category == "" && current_category == "" ? true : found_category;
 				if(found_category || all){
@@ -95,6 +97,7 @@ vector<string> get_category_list(string category, bool all){
 			continue;
 			case ';':
 				texto = "";
+				char_start = false;
 			continue;
 		}
 		texto += letra;
@@ -111,13 +114,14 @@ vector<Producto> get_products_in_category(string category){
 	bool found_category = false;
 	int property_count = 0;
 	char letra;
+	bool char_start = false;
 	if(category == ""){
 		found_category = true;
 	}
 	while(!feof(archivo)){
 		letra = fgetc(archivo);
 		int ult_barra = current_category.rfind('/');
-		if(letra == '\n' || letra == '\r' || letra == '\t'){
+		if(letra == '\n' || letra == '\r' || letra == '\t' || (letra == ' ' && !char_start) || !letras_permitidas(letra)){
 			if(property_count > 0){
 				product.categoria = current_category.substr(ult_barra+1, current_category.length());
 				products.push_back(product);
@@ -125,13 +129,16 @@ vector<Producto> get_products_in_category(string category){
 			}
 			continue;
 		}
+		char_start = true;
 		switch(letra){
 			case '{':
+				char_start = false;
 				current_category = current_category + "/" + texto;
 				found_category = current_category == category && !found_category ? true : found_category;
 				texto = "";
 			continue;
 			case '}':
+				char_start = false;
 				texto = "";
 				found_category = current_category == category && found_category ? false : found_category;
 				if(ult_barra != string::npos){
@@ -156,6 +163,7 @@ vector<Producto> get_products_in_category(string category){
 				if(found_category){
 					property_count++;
 				}
+				char_start = false;
 				texto = "";	
 			continue;
 		}
